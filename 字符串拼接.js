@@ -103,4 +103,4 @@ fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
 // 2
 // console.log(fnConnectChar(":", oJoinType.useTop, "大家好我是占位符", "说明1", "说明2", "", "说明4"));
 // 3
-console.log(fnConnectChar("", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "说明2", "说明3", "说明4"));
+// console.log(fnConnectChar("", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "说明2", "说明3", "说明4"));
