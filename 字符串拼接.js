@@ -3,7 +3,7 @@
  */
 const oJoinType = {
     // 1.任意拼接项不可用,则返回占位符.
-    useAll: "userAll",
+    useAll: "useAll",
     // 2.任意拼接项不可用,则该拼接项之后所有拼接项弃用.
     useTop: "useTop",
     // 3.任意拼接项不可用,则忽略该拼接项.
@@ -29,7 +29,7 @@ const oJoinType = {
  * @param sPlaceholder 占位符
  * @param props 参数列表
  */
-fnConnectChar = (sKeyWord, sJoinType, sPlaceholder = "-", ...props) => {
+const fnConnectChar = (sKeyWord, sJoinType, sPlaceholder = "-", ...props) => {
     const aProps = props;
     let sShowContent = "";
     try {
@@ -59,12 +59,12 @@ fnConnectChar = (sKeyWord, sJoinType, sPlaceholder = "-", ...props) => {
 }
 
 // 字符串是否可用.
-fnIsUseChar = (sChar) => {
+const fnIsUseChar = (sChar) => {
     return sChar !== undefined && sChar !== null && sChar.trim() !== "";
 }
 
 // type 1:
-fnUseAll = (sKeyWord, sPlaceholder, aProps) => {
+const fnUseAll = (sKeyWord, sPlaceholder, aProps) => {
     const bIsUse = aProps.every((sItem) => {
         return fnIsUseChar(sItem);
     });
@@ -73,7 +73,7 @@ fnUseAll = (sKeyWord, sPlaceholder, aProps) => {
 }
 
 // type 2:
-fnUseTop = (sKeyWord, sPlaceholder, aProps) => {
+const fnUseTop = (sKeyWord, sPlaceholder, aProps) => {
     let aUseProps = [];
     for (let i = 0; i < aProps.length; i++) {
         if (!fnIsUseChar(aProps[i])) {
@@ -86,13 +86,12 @@ fnUseTop = (sKeyWord, sPlaceholder, aProps) => {
 }
 
 // type 3:
-fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
+const fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
     let aUseProps = aProps.filter((item) => {
         return fnIsUseChar(item);
     });
     return aUseProps.length > 0 ? aUseProps.join(sKeyWord) : sPlaceholder;
 }
-
 
 
 /**
@@ -103,4 +102,6 @@ fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
 // 2
 // console.log(fnConnectChar(":", oJoinType.useTop, "大家好我是占位符", "说明1", "说明2", "", "说明4"));
 // 3
-// console.log(fnConnectChar("/", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "", "说明3", "说明4"));
+// console.log(fnConnectChar("", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "说明2", "说明3", "说明4"));
+
+export { fnConnectChar, oJoinType };
