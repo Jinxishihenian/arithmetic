@@ -22,7 +22,7 @@ const oJoinType = {
  * @param sKeyWord 连接关键字
  *
  * 1.任意拼接项不可用,则返回占位符.
- * 2.任意拼接项不可用,则该拼接项之后所有拼接项弃用.
+ * 2.任意拼接项不可用,则该拼接项之后所有拼接项弃用(包含不可用拼接项).
  * 3.任意拼接项不可用,则忽略该拼接项.
  * @param sJoinType 连接类型
  *
@@ -103,4 +103,4 @@ fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
 // 2
 // console.log(fnConnectChar(":", oJoinType.useTop, "大家好我是占位符", "说明1", "说明2", "", "说明4"));
 // 3
-// console.log(fnConnectChar("", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "说明2", "说明3", "说明4"));
+// console.log(fnConnectChar("/", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "", "说明3", "说明4"));
