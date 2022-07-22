@@ -24,12 +24,12 @@ const oJoinType = {
  * 1.任意拼接项不可用,则返回占位符.
  * 2.任意拼接项不可用,则该拼接项之后所有拼接项弃用(包含不可用拼接项).
  * 3.任意拼接项不可用,则忽略该拼接项.
- * @param sJoinType 连接类型
+ * @param sJoinType 不必填 默认值 oJoinType.useArbitrarily 连接类型.
  *
- * @param sPlaceholder 占位符
+ * @param sPlaceholder 不必填 默认值 “-” 占位符.
  * @param props 参数列表
  */
-const fnConnectChar = (sKeyWord, sJoinType, sPlaceholder = "-", ...props) => {
+const fnConnectChar = ({ sKeyWord, sJoinType = oJoinType.useArbitrarily, sPlaceholder = "-" }, ...props) => {
     const aProps = props;
     let sShowContent = "";
     try {
@@ -97,11 +97,10 @@ const fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
 /**
  * 用法
  */
-// 1
-// console.log(fnConnectChar("~", oJoinType.useAll, "大家好我是占位符", "开始时间", "结束时间"));
-// 2
-// console.log(fnConnectChar(":", oJoinType.useTop, "大家好我是占位符", "说明1", "说明2", "", "说明4"));
-// 3
-// console.log(fnConnectChar("", oJoinType.useArbitrarily, "大家好我是占位符", "说明1", "说明2", "说明3", "说明4"));
+// 1 可简写使用默认参数.
+// console.log(fnConnectChar({ sKeyWord: "~" }, "开始时间", "结束时间"));
+// 2 可全部写入参数.
+// console.log(fnConnectChar({ sKeyWord: "/", sJoinType: oJoinType.useTop, sPlaceholder: "占位符" }, "说明1", "", "", "说明4"));
 
-export { fnConnectChar, oJoinType };
+// 在模块中打开该注释.
+// export { fnConnectChar, oJoinType };
