@@ -93,12 +93,27 @@ const fnUseArbitrarily = (sKeyWord, sPlaceholder, aProps) => {
     return aUseProps.length > 0 ? aUseProps.join(sKeyWord) : sPlaceholder;
 }
 
+// 函数柯里化/高阶函数.
+// 只针对时间.
+const joinTimeWrapper = () => {
+    return (beTime, endTime) => {
+        return fnConnectChar({ sKeyWord: "~" }, beTime, endTime);
+    }
+}
+
+// 只针对地区.
+const joinSiteWrapper = () => {
+    return (...props) => {
+        return fnConnectChar({ sKeyWord: "/", sJoinType: oJoinType.useTop }, ...props)
+    }
+}
 
 /**
  * 用法
  */
 // 1 可简写使用默认参数.
 // console.log(fnConnectChar({ sKeyWord: "~" }, "开始时间", "结束时间"));
+
 // 2 可全部写入参数.
 // console.log(fnConnectChar({ sKeyWord: "/", sJoinType: oJoinType.useTop, sPlaceholder: "占位符" }, "说明1", "", "", "说明4"));
 
