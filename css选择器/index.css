@@ -1,0 +1,125 @@
+/*div[class="demo1"] {
+    background-color: red;
+}
+
+.demo1 div[class="demo4 demo5 demo_public"] {
+    background-color: blue;
+}*/
+
+/*div[class="*demo_public"] {
+    background-color: blue;
+}*/
+
+/*.demo2, .demo3 {
+    background-color: yellow;
+}*/
+
+/*.demo1 .demo2 {
+    background-color: green;
+}*/
+/*
+.demo6 {
+    background-color: darkgray;
+}
+
+!*并集*!
+.demo7, .demo_public {
+    background-color: azure;
+}
+
+!*子代*!
+.demo7 .demo_public {
+    background-color: red;
+}
+
+!*交集*!
+.demo7.demo_public {
+    background-color: black;
+}
+*/
+/*并集*/
+/*
+.demo7 {
+    background-color: yellow;
+}
+
+.demo8, .demo7 {
+    background-color: red;
+}*/
+.tui-checkbox:checked {
+    background: #1673ff
+}
+
+.tui-checkbox {
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+    border: solid 1px #dddddd;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    cursor: default;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-transition: background-color ease 0.1s;
+    transition: background-color ease 0.1s;
+    outline: none;
+}
+
+.tui-checkbox:checked::after {
+    content: '';
+    top: 16%;
+    left: 50%;
+    position: absolute;
+    background: transparent;
+    border: #fff solid 2px;
+    border-top: none;
+    border-right: none;
+    height: 3px;
+    width: 6px;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg) translateX(-50%) translateY(-50%);
+
+}
+
+.first-layout {
+    position: relative;
+    height: 100px;
+    background: url("./images/demo2.jpeg");
+}
+
+.second-layout {
+    position: relative;
+    height: 200px;
+    background-color: yellow;
+    margin-top: -50px;
+    /*z-index: 100;*/
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.fled-content {
+    width: 400px;
+    float: left;
+    background-color: red;
+    /*display: inline-block;*/
+}
+
+.float-content {
+    /*clear: left;*/
+    width: 40px;
+    float: right;
+    background-color: yellow;
+}

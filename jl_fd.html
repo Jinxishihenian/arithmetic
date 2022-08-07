@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div onclick="fduse('不知火舞')">
+    点击测试2
+</div>
+</body>
+<script>
+    // wss思路.
+    // let jl = (call, time) => {
+    // 函数防抖.
+    // 指定间隔时间内执行一次.
+
+    // 内部定时函数需要通知外部函数可以进行运行.
+    // 如何通知外部函数?如果将变量进行提升则,执行函数时,函数会初始化该变量.
+    // 有无办法使函数无法初始化变量?
+    // 无.
+
+    // 更换判断条件.
+    // 如何将判断条件与执行流隔开?
+    //
+    // }
+
+    // 官方思路.
+    function jl(fn, time) {
+        let flag = true;
+        return function () {
+            if (!flag) return false;
+            setTimeout(() => {
+                console.log(`我的this指向${this}`);
+                fn.apply(this, arguments);
+                flag = true
+            }, time);
+        }
+    }
+
+    const jlEs6 = (fn, time) => {
+        let flag = true;
+        return (...ars) => {
+            if (!flag) return false;
+            setTimeout(() => {
+                console.log(`我的this指向${this}`);
+                fn.apply(this, ars);
+                flag = true
+            }, time);
+        }
+    }
+    let jluse = jlEs6(function (name) {
+        console.log(name);
+    }, 1000);
+    // 防抖.
+    let fd = (call, time) => {
+        let timer = null;
+        return (...args) => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                call(args);
+                console.log(`测试timer的值2:${timer}`);
+                // timer = null;
+            }, time);
+        }
+    }
+
+    let fduse = fd((name) => {
+        console.log(name);
+    }, 1000);
+
+</script>
+</html>

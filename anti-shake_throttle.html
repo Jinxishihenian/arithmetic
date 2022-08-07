@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div onclick="demo('i love you','w')">
+        点击开始执行防抖函数
+    </div>
+</div>
+</body>
+<script>
+    const antiShake = (callBack, time) => {
+        let flat;
+        return (...props) => {
+            if (flat) clearTimeout(flat);
+            flat = setTimeout(() => {
+                callBack.apply(this, props);
+            }, time);
+        }
+    }
+    let demo1 = () => {
+        console.log('点击测试');
+    }
+    // 防抖.
+    let demo = antiShake((a1, a2) => {
+        console.log(a1);
+        console.log(a2);
+    }, 2000);
+    // 节流.
+    let throttle = (callback, time) => {
+        let flat = true;
+        return (...props) => {
+            if (!flat) return;
+            flat = false;
+            setTimeout(() => {
+                callback.apply(this, props);
+                flat = true;
+            }, time);
+        }
+    };
+
+    demo2 = throttle(() => {
+        console.log('测试');
+    }, 2000);
+</script>
+</html>
