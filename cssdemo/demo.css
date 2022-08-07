@@ -1,7 +1,0 @@
-.demo * + * {
-    margin-top: 10px;
-}
-
-.list li:not(:first-child) {
-    margin-top: 6px;
-}

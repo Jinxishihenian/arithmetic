@@ -49,4 +49,16 @@ B.__proto__ = A;
 C.__proto__ = B;
 D.__proto__ = C;
 
+let fun = () => {
+}
+let obj = {}
+console.log(fun.__proto__.constructor);
+console.log(obj.__proto__.constructor);
+
+let demo = ({a, b}) => {
+    console.log(a);
+    console.log(b);
+}
+demo(a);
+
 console.log(D.O);

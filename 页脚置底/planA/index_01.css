@@ -11,7 +11,7 @@ body {
 
 footer {
     position: absolute;
-    /*bottom: 0;*/
+    /*页脚置底: 0;*/
     height: 200px;
     width: 100%;
 }

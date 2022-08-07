@@ -1,7 +1,5 @@
 function formatDate(date, fmt) {
     var date = new Date(date);
-    console.log("我的时间");
-    console.log(date);
     if (/(y+)/.test(fmt)) {
         fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
     }
