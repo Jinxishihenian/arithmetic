@@ -46,6 +46,8 @@ Validator.prototype.add = function (dom, rules) {
 // 开始校验.
 Validator.prototype.validity = function () {
     for (let i = 0, validity; validity[i++];) {
-        return validity();
+        const message = validity();
+        if (message) return validity();
     }
+
 }
