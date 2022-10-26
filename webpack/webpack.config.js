@@ -6,7 +6,8 @@ const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = {
     // 项目入口文件.
-    entry: './main.js',
+    entry:  './main.js',
+    devtool: 'eval-source-map',
     devServer: {
         hot: true,
         static: './',
@@ -82,5 +83,6 @@ module.exports = {
 
     ],
     // 开发模式.
-    mode: 'development'
+    // mode: 'development'
+    mode: 'none'
 }
