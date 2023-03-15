@@ -8,12 +8,32 @@
 
 </body>
 <script>
-    const blob = new Blob(['Hello,word'], { type: 'text/plain' });
+    // 下载pdf.
+    /*const blob = new Blob(['Hello,word'], { type: 'text/plain' });
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a');
     link.download = '测试文本.'
     link.href = url;
     document.body.appendChild(link)
-    link.click();
+    link.click();*/
+    // 下载图片.
+    const xhr = new XMLHttpRequest();
+    // TODO open方法未知.
+    xhr.open('GET', 'https://i.328888.xyz/2023/03/14/9JTRd.png');
+    xhr.responseType = 'blob';
+    // TODO 监听回调未知.
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            // TODO Blob方法不止到调用方式.
+            const blob = new Blob([xhr.response], { type: 'image/png' })
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '测试图片';
+            // TODO 创建未调用.
+            document.body.appendChild(link);
+            link.click();
+        }
+    };
+    xhr.send();
 </script>
 </html>
