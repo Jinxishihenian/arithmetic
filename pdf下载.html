@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    const blob = new Blob(['Hello,word'], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a');
+    link.download = '测试文本.'
+    link.href = url;
+    document.body.appendChild(link)
+    link.click();
+</script>
+</html>
