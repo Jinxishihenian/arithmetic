@@ -1,15 +1,24 @@
+/*
 const foo = () => console.log('First');
 const bar = () => {
-    console.log('bar')
     setTimeout(() => {
-        console.log('Send');
+        console.log('Two');
     }, 500)
 };
-const baz = () => console.log('Third');
+const baz = () => console.log('Three');
 bar();
 foo();
-baz();
-// bar
-// First
-// Third
-// Send
+baz();*/
+
+function greet() {
+    return "Hello";
+}
+
+function respond() {
+    return setTimeout(() => {
+        return "Hey"
+    }, 1000)
+}
+
+greet();
+respond();
