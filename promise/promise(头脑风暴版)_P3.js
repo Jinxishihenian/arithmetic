@@ -1,4 +1,4 @@
-function Promise(callBack) {
+function WindstormPromise(callBack) {
     // 默认等待.
     let states = 'pending';
     let value = undefined;
@@ -30,8 +30,11 @@ function Promise(callBack) {
     // 1.如何共享数据?
 }
 
+/*
+运行测试.
 new Promise((resolve, reject) => {
     resolve('11')
 }).then((value) => {
     console.log(value)
-})
+})*/
+
