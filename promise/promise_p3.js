@@ -98,3 +98,27 @@ new Promise((resolve, reject) => {
 // 输出fulfilled.
 */
 
+new Promise((resolve) => {
+    setTimeout(() => {
+        console.log('构造函数');
+        resolve()
+    }, 3000)
+}).then(() => {
+    console.log('then0')
+    setTimeout(() => {
+        console.log('then1')
+    }, 3000)
+}).then(() => {
+    console.log('then2')
+})
+
+/*
+1.代码首先进入一个宏任务整个script脚本.
+2.执行同步代码,将Promise构造函数的参数callback(),弹入到调用栈中,发现是一个定时任务,将该定时器的回调函数放置到WebAPI提供的线程.
+3.then中的回调进入微任务队列.
+4.一次事件循环结束.
+5.二次事件循环开始.
+6.从宏任务中开始.
+3.此时调用栈为空.WEBapi包含一个定时任务的回调,宏任务,微任务队列分别为空,第一轮事件循环结束,进入等待状态.
+4.WEBAPI等待3秒后将定时任务的回调函数推入到宏任务队列中,由于调用栈为空宏任务立即执行,输出'构造函数',并不清楚该轮事件循环是否结束.
+*/
