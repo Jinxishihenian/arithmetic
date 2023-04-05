@@ -34,12 +34,12 @@ function WindstormPromise(callBack) {
         }
 
         if (states === 'fulfilled') {
-            item.onResolve();
+            item.onResolve(value);
             return;
         }
 
         if (states === 'reject') {
-            item.onRejected();
+            item.onRejected(value);
         }
     }
 
@@ -91,21 +91,19 @@ function WindstormPromise(callBack) {
                  },
              });*/
             handler({
-                onResolve: () => {
+                onResolve: (v) => {
                     try {
-                        resolve()
+                        resolve(onResolve(v))
                     } catch (e) {
-                        reject();
+                        reject(onRejected(v));
                     }
-                    onResolve();
                 },
-                onRejected: () => {
+                onRejected: (v) => {
                     try {
-                        resolve();
+                        resolve(onRejected(v));
                     } catch (e) {
-                        reject();
+                        reject(onRejected(v));
                     }
-                    onRejected();
                 }
             })
         })
@@ -116,12 +114,13 @@ function WindstormPromise(callBack) {
 new WindstormPromise((resolve, reject) => {
     setTimeout(() => {
         console.log('构造函数')
-        resolve()
+        resolve(1)
     }, 3000)
-}).then(() => {
-    console.log('then1')
-}).then(() => {
-    console.log('then2')
+}).then((val) => {
+    console.log('then1', val)
+    return val;
+}).then((val) => {
+    console.log('then2', val)
 })
 
 
