@@ -7,8 +7,10 @@ function MyPromise(fn) {
         if (state !== 'pending') return;
         state = 'fulfilled';
         value = result;
+        console.log('执行次数==.',JSON.stringify(handlers))
         handlers.forEach(handle);
         handlers = null;
+
     }
 
     function reject(error) {
@@ -20,6 +22,7 @@ function MyPromise(fn) {
     }
 
     function handle(handler) {
+        console.log(state)
         if (state === 'pending') {
             handlers.push(handler);
         } else {
@@ -65,11 +68,15 @@ function MyPromise(fn) {
 }
 
 new MyPromise((resolve, reject) => {
-    setTimeout(()=>{
-        resolve('构造函数参数');
-        console.log('测试是否可以继续运行')
-    },3000)
+    setTimeout(() => {
+        console.log('promise构造函数');
+        resolve();
+    }, 3000)
+
 }).then((value) => {
-    console.log('===测试值==');
-    console.log(value)
+    console.log('then1')
+}).then((value) => {
+    console.log('then2')
+}).then((value)=>{
+    console.log('then3')
 });

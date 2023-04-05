@@ -81,7 +81,7 @@ console.log('start')
 */
 
 // 1.6 题目六
-const fn = () =>
+/*const fn = () =>
     new Promise((resolve, reject) => {
         console.log(1);
         resolve('success')
@@ -91,7 +91,7 @@ console.log('start')
 
 fn().then(res => {
     console.log(res)
-})
+})*/
 // wss:start
 // wss:1
 // wss:success
@@ -120,8 +120,61 @@ console.log('end');
 // wss: time
 // 宏任务2结束.
 // 正确*/
+function miniPromise(fn) {
+    let handle = [];
+    this.then = (thenfn) => {
+        return new miniPromise(() => {
+            handle.push(1);
+            console.log('handle的长度');
+            console.log(handle)
+            thenfn()
+        });
+    }
+    fn();
+}
+
+new miniPromise(() => {
+    console.log('0');
+}).then(() => {
+    console.log('1')
+}).then(() => {
+    console.log('2')
+}).then(() => {
+    console.log('3')
+})
 
 
 
+// 1.then有什么功能?
+// - 返回一个新Promise对象.
+// - 根据上一个Promise对象的状态来决定,本次要执行的操作(Promise成功/失败/等待).
+// - 接收上一个Promise传递的值.
 
-
+/*
+new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('延时执行')
+        reject()
+        // resolve()
+    }, 3000)
+}).then(
+    () => {
+        console.log(1)
+    },
+    /!* () => {
+         console.log(2)
+     }*!/
+).then(
+    () => {
+    },
+    () => {
+        console.log(3)
+    }
+).then(
+    () => {
+        console.log(4)
+    },
+    () => {
+        console.log(5)
+    }
+);*/

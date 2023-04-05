@@ -98,6 +98,7 @@ new Promise((resolve, reject) => {
 // 输出fulfilled.
 */
 
+/*
 new Promise((resolve) => {
     setTimeout(() => {
         console.log('构造函数');
@@ -111,6 +112,7 @@ new Promise((resolve) => {
 }).then(() => {
     console.log('then2')
 })
+*/
 
 /*
 分析:
@@ -126,3 +128,33 @@ new Promise((resolve) => {
 // then0
 // then2
 // then1
+
+Promise.reject()
+    .then(
+        () => {
+            console.log('fulfilled1')
+        },
+        /*() => {
+            console.log('reject1')
+        }*/
+    )
+    .then(
+        () => {
+            console.log('fulfilled2')
+        },
+        () => {
+            console.log('reject2')
+        }
+    )
+    .then(
+        () => {
+            console.log('fulfilled3')
+        },
+        () => {
+            console.log('reject3')
+        },
+    )
+// reject2
+// fulfilled3
+// then的执行方式,不考虑出错的情况,遇到前一个promise的状态为fulfilled则then执行成功回调,遇到promise的状态为reject则执行失败回调
+// 此处讨论失败回调,若该then有失败的回调则此次promise的状态更改为成功,若没有失败回调则更改为失败状态.
