@@ -47,21 +47,14 @@ function WindstormPromise(callBack) {
 
     // 实例方法.
     // TODO 如何创建then方法.
-    // TODO then可以接收两个参数,onFulfilled,onReject.
-    /*  const then = (other) => {
-          other(value)
-          // TODO 如何返回一个新的Promise对象.
-          return this;
-      }*/
+    // TODO 如何返回一个新的Promise对象.
     // TODO 假设将then方法绑定到原型对象中,会面临几个问题.
-    // 1.如何共享数据?
     // TODO 为什么this.then就可以了.
     this.then = (onResolve, onRejected) => {
         // 可能执行onResolve.
         // 可能执行onRejected.
         // 可能什么都不执行.
         // TODO onRejected情况如何处理?
-        // handle.push(onResolve);
         return new WindstormPromise((resolve, reject) => {
             // 在这里会做些什么?
             // 1.根据上一个Promise的状态来进行操作.
