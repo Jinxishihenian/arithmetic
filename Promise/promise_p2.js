@@ -56,7 +56,7 @@
          console.log(data);
      });
      /*
-     * promise 处理失败的操作
+     * Promise 处理失败的操作
      */
      function getNumber(){
          var promiseObj = new Promise(function (resolve,reject) {

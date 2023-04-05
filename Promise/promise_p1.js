@@ -18,13 +18,13 @@ function createAudioFileAsync() {
 
 createAudioFileAsync(audioSettings, successCallback, failureCallback);
 
-const promise = createAudioFileAsync(audioSettings);
+const Promise = createAudioFileAsync(audioSettings);
 
-promise.then(successCallback, failureCallback);
+Promise.then(successCallback, failureCallback);
 
 createAudioFileAsync(audioSettings).then(successCallback, failureCallback);*/
 
-// promise 异常捕获.
+// Promise 异常捕获.
 // new Promise((resolve, reject) => {
 //     console.log('初始化')
 //     resolve();

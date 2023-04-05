@@ -11,13 +11,13 @@ console.log('1', promise1);
 */
 
 // 1.2题目二.
-/*const promise = new Promise((resolve, reject) => {
+/*const Promise = new Promise((resolve, reject) => {
     console.log(1)
     resolve('success')
     console.log(2)
 })
 
-promise.then(() => {
+Promise.then(() => {
     console.log(3)
 })
 console.log(4)
@@ -30,12 +30,12 @@ console.log(4)
 
 // 1.3 题目三.
 /*
-const promise = new Promise((resolve, reject) => {
+const Promise = new Promise((resolve, reject) => {
     console.log(1);
     console.log(2);
 });
 
-promise.then(() => {
+Promise.then(() => {
     console.log(3);
 })
 

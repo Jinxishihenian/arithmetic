@@ -1,5 +1,5 @@
 const presets = [
-    ['@babel/env', {
+    ['@Babel/env', {
         debug: true,
         useBuiltIns: 'usage',
         corejs: 3,
@@ -10,7 +10,7 @@ const presets = [
 ];
 const plugins = [
     [
-        '@babel/plugin-transform-runtime'
+        '@Babel/plugin-transform-runtime'
     ]
 ];
 if (process.env["ENV"] === "prod") {

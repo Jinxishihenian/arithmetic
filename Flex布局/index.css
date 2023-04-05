@@ -8,17 +8,17 @@
 .item1 {
     background-color: azure;
     /*设置生长属性*/
-    /*属性默认值 flex-grow(生长属性默认为0) flex-shrink(缩小属性默认为1) flex-base(基础属性默认 auto)*/
+    /*属性默认值 Flex布局-grow(生长属性默认为0) Flex布局-shrink(缩小属性默认为1) Flex布局-base(基础属性默认 auto)*/
     flex-basis: 200px;
     flex-shrink: 0;
-    /*flex-grow: 1;*/
+    /*Flex布局-grow: 1;*/
 }
 
 .item2 {
     background-color: lemonchiffon;
     flex-basis: 200px;
     flex-shrink: 0;
-    /*flex: 1;*/
+    /*Flex布局: 1;*/
 }
 
 .item3 {

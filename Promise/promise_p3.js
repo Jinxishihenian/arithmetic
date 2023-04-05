@@ -29,35 +29,35 @@ Promise.reject('异常').then((value) => {
 // race/all/allSettled/any例子.
 /*
 function runAsync1() {
-    const promise = new Promise((resolve,reject) => {
+    const Promise = new Promise((resolve,reject) => {
         setTimeout(() => {
             console.log('异步任务1执行完成')
             reject('异步任务1结果')
         }, 3000)
     })
-    return promise;
+    return Promise;
 }
 
 function runAsync2() {
-    const promise = new Promise((resolve, reject) => {
+    const Promise = new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('异步任务2执行完成')
             reject('异步任务2结果')
             // reject()
         }, 2000)
     })
-    return promise;
+    return Promise;
 }
 
 function runAsync3() {
-    const promise = new Promise((resolve,reject) => {
+    const Promise = new Promise((resolve,reject) => {
         setTimeout(() => {
             // console.log('异步任务3执行完成')
             // resolve('异步任务3结果')
             reject();
         }, 1000)
     })
-    return promise;
+    return Promise;
 }
 */
 
