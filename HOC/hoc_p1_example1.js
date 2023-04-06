@@ -34,7 +34,7 @@ let getGirl = grades => (grades.filter(isGirl));
 // 获取平均值.
 let average = grades => (
     grades.reduce((acc, curr) => {
-        return acc + curr;
+        return acc + curr.grade;
     }, 0) / grades.length
 )
 
@@ -52,4 +52,32 @@ let boysAverage = average(getBoys(grades));
 
 // 获取女生平均成绩.
 let girlsAverage = average(getGirl(grades));
+
+// 获取最高分.
+let highestGrade = maxGrade(grades);
+
+// 获取最低分.
+let lowestGrade = minGrade(grades);
+
+// 获取男生最高分.
+let highestBoysGrade = maxGrade(getBoys(grades));
+
+// 获取男生最低分.
+let lowestBoysGrade = minGrade(getBoys(grades));
+
+// 获取女生最高分.
+let highestGirlGrade = maxGrade(getGirl(grades));
+
+// 获取女生最低分.
+let lowestGirlGrade = minGrade(getGirl(grades));
+console.log(classroomAverage)
+console.log(boysAverage)
+console.log(girlsAverage)
+console.log(highestGrade)
+console.log(lowestGrade)
+console.log(highestBoysGrade)
+console.log(lowestBoysGrade)
+console.log(highestGirlGrade)
+console.log(lowestGirlGrade)
+
 
