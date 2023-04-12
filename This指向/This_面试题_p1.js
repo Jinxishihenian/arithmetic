@@ -1,3 +1,5 @@
+/*
+ topic 1
 var a = 1;
 
 function foo() {
@@ -11,3 +13,16 @@ function foo() {
 }
 
 foo();  // 输出 2
+*/
+var a = 1
+
+function foo() {
+    var a = 2
+    console.log(this)
+    console.log(this.a)
+}
+
+foo()
+let a = {}
+let a= new Object()
+// new foo()
