@@ -1,0 +1,101 @@
+<script>
+    // 默认绑定.
+    // topic1
+    /*var a = 10;
+
+    function foo() {
+        console.log(this.a)
+    }
+
+    foo();*/
+    // a 错误.
+    // 将a看成输出内容,10才是真正的输出内容.
+
+    // topic2.
+    /*"use strice"
+    var a = 10;
+
+    function foo() {
+        console.log('this1', this);
+        console.log(window.a)
+        console.log(this.a);
+    }
+
+    console.log(window.foo)
+    console.log('this2', this);
+    foo();*/
+    // 输出foo定义的函数.
+    // this2 window
+    // this1 window
+    // 10
+    // 10
+    // 错误.
+    // 严格模式下函数内的this指向undefined.
+
+    // topic3.
+    /*let a = 10;
+    const b = 20;
+
+    function foo() {
+        console.log(this.a);
+        console.log(this.b);
+    }
+
+    foo();
+    console.log(window.a)*/
+    // 输出内容.
+    // 10
+    // 20
+    // 10
+    // 错误.如果把var改成let或者const,变量是不会被绑定到window上的，所以此时会打印出三个undefined.
+
+    // topic4.
+    /*var a = 1;
+
+    function foo() {
+        var a = 2;
+        console.log(this)
+        console.log(this.a)
+    }
+
+    foo();*/
+    // 输出内容.
+    // Window
+    // 1
+    // 正确.
+
+    // topic5.
+    /*var a = 1;
+
+    function foo() {
+        var a = 2;
+
+        function inner() {
+            console.log(this.a);
+        }
+
+        inner.bind(this)();  // 将 inner 函数中的 this 值绑定到 foo 函数的执行上下文中
+    }
+
+    foo();*/
+    // 输出 2
+
+
+    // 2.
+    // 错误.
+
+    // 隐式绑定.
+    /*function foo() {
+        console.log(this.a);
+    }
+
+    var obj = { a: 1, foo }
+    var a = 2;
+    obj.foo()*/
+    // 输出内容:2 错误.
+
+    // 3. 隐式绑定的隐式丢失问题
+
+</script>
+
+

@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Title</title>
+</head>
+<style>
+    #tel_input {
+    }
+
+    #tel_warn_text {
+        display: none;
+    }
+
+    #tel_dome_text {
+    }
+</style>
+<body>
+    <input id="tel_input" type="text">
+    <span id="tel_warn_text">format hint text</span>
+    <span id="tel_dome_text">default hint text</span>
+
+    <input id="name_input" type="text">
+    <span id="name_warn_text">format hint text</span>
+    <span id="name_dome_text">default hint text</span>
+</body>
+<script>
+    // 装饰器.
+    let decorator = (input, fn) => {
+        // 获取事件源.
+        let _input = document.getElementById(input);
+        // 若事件源头已经绑定事件.
+        if (typeof _input.onclick === 'function') {
+            // 缓存事件源原有点击事件.
+            let oldInput = _input.onclick;
+            // 为事件源重新定义新的事件.
+            _input.onclick = () => {
+                // 事件源原有回调函数.
+                oldInput()
+                // 执行事件源新增回调函数.
+                fn()
+            }
+        } else {
+            fn()
+        }
+    }
+
+    // 原版功能.
+    let telInput = document.getElementById('tel_input');
+    let telWarnText = document.getElementById('tel_warn_text');
+    // let telDomeText = document.getElementById('tel_dome_text');
+    telInput.onclick = () => {
+        telWarnText.style.display = 'inline-block';
+        // 附加功能.
+        // telDomeText.style.display = 'none';
+    }
+
+    // 使用装饰器完成新增功能.
+    decorator('tel_input', () => {
+        let telDomeText = document.getElementById('tel_dome_text');
+        telDomeText.style.display = 'none';
+    });
+
+</script>
+</html>
