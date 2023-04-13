@@ -12,15 +12,28 @@
 
     #tel_dome_text {
     }
+
+    #name_input {
+    }
+
+    #name_warn_text {
+        display: none;
+    }
+
+    #name_dome_text {
+    }
 </style>
 <body>
-    <input id="tel_input" type="text">
-    <span id="tel_warn_text">format hint text</span>
-    <span id="tel_dome_text">default hint text</span>
-
-    <input id="name_input" type="text">
-    <span id="name_warn_text">format hint text</span>
-    <span id="name_dome_text">default hint text</span>
+    <div>
+        <input id="tel_input" type="text">
+        <span id="tel_warn_text">format hint text</span>
+        <span id="tel_dome_text">default hint text</span>
+    </div>
+    <div>
+        <input id="name_input" type="text">
+        <span id="name_warn_text">format hint text</span>
+        <span id="name_dome_text">default hint text</span>
+    </div>
 </body>
 <script>
     // 装饰器.
@@ -53,11 +66,25 @@
         // telDomeText.style.display = 'none';
     }
 
+    // 原版功能.
+    let nameInput = document.getElementById('name_input');
+    let nameWarnText = document.getElementById('name_warn_text');
+    // let telDomeText = document.getElementById('tel_dome_text');
+    nameInput.onclick = () => {
+        nameWarnText.style.display = 'inline-block';
+        // 附加功能.
+        // telDomeText.style.display = 'none';
+    }
+
     // 使用装饰器完成新增功能.
     decorator('tel_input', () => {
         let telDomeText = document.getElementById('tel_dome_text');
         telDomeText.style.display = 'none';
     });
-
+    // 使用装饰器完成新增功能.
+    decorator('name_input', () => {
+        let nameDomeText = document.getElementById('name_dome_text');
+        nameDomeText.style.display = 'none';
+    });
 </script>
 </html>
