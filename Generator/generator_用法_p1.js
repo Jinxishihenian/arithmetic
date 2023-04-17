@@ -76,7 +76,6 @@ next1.value.then((res1) => {
     });
 })*/
 
-/*
 function* gen() {
     const num1 = yield 1;
     console.log(num1)
@@ -89,7 +88,6 @@ let g = gen();
 console.log(g.next());
 console.log(g.next(1111))
 console.log(g.next(2222))
-*/
 
 /*
 function fn(nums) {

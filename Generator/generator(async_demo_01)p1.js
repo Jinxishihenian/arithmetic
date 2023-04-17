@@ -6,6 +6,7 @@ function fn(nums) {
     });
 }
 
+
 function* gen() {
     const num1 = yield fn(1);
     console.log(num1)
@@ -15,8 +16,7 @@ function* gen() {
     console.log(num3)
     return num3
 }
-
-function genHoc(gen) {
+/*function genHoc(gen) {
     return () => {
         return new Promise((resolve) => {
             const g = gen();
@@ -32,10 +32,33 @@ function genHoc(gen) {
             })
         })
     };
+}*/
+
+
+function genHoc(generatorFn) {
+    return () => {
+        return new Promise((resolve, reject) => {
+            const g = generatorFn();
+            const go = (res) => {
+                // TODO 对 next 传参了解不深刻.
+                const next = g.next(res);
+                const { value, done } = next;
+                // TODO 判定停止循环条件.
+                if (done) {
+                    //TODO 为什么要用一个新的Promise,且值为何要传入resolve不可以直接调用go并且传参?
+                    Promise.resolve(value).then((res) => {
+                        go(res)
+                    })
+                } else {
+                    resolve(value);
+                }
+            }
+            go();
+        })
+    }
 }
 
 const demo = genHoc(gen)
-
 demo().then((res) => {
     console.log(res)
 })
