@@ -32,6 +32,8 @@
         add = () => {
             this.setState({
                 index: 2
+            }, () => {
+                alert(this.state.index)
             })
         }
 
