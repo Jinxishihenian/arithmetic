@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://cdn.bootcdn.net/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+
+    /*function Blog() {
+        this.state = {}
+        return (
+            <div>
+                <li>Test</li>
+                <button onClick=""></button>
+            </div>
+        )
+    }*/
+    class Blog extends React.Component {
+        state = {
+            index: 1
+        }
+        add = () => {
+            this.setState({
+                index: 2
+            })
+        }
+
+        render() {
+            return (
+                <div>
+                    <button onClick={this.add}>
+                        +
+                    </button>
+                    <div>
+                        {this.state.index}
+                    </div>
+                </div>
+
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Blog />, document.getElementById('root')
+    )
+</script>
+</html>
