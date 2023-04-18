@@ -6,7 +6,6 @@ function fn(nums) {
     });
 }
 
-
 function* gen() {
     const num1 = yield fn(1);
     console.log(num1)
@@ -16,6 +15,7 @@ function* gen() {
     console.log(num3)
     return num3
 }
+
 /*function genHoc(gen) {
     return () => {
         return new Promise((resolve) => {
@@ -34,8 +34,9 @@ function* gen() {
     };
 }*/
 
-
-function genHoc(generatorFn) {
+// 该函数的作用是将Generator函数转换为Promise函数.
+// TODO为什么此处使用高阶函数?
+/*function genHoc(generatorFn) {
     return () => {
         return new Promise((resolve, reject) => {
             const g = generatorFn();
@@ -44,8 +45,10 @@ function genHoc(generatorFn) {
                 const next = g.next(res);
                 const { value, done } = next;
                 // TODO 判定停止循环条件.
-                if (done) {
-                    //TODO 为什么要用一个新的Promise,且值为何要传入resolve不可以直接调用go并且传参?
+                if (!done) {
+                    // TODO 为什么要用一个新的Promise,且值为何要传入resolve不可以直接调用go并且传参?
+                    // 为什么要用Promise.resolve包裹value?
+                    // 因为value可能是Promise也可能是常量.
                     Promise.resolve(value).then((res) => {
                         go(res)
                     })
@@ -56,11 +59,30 @@ function genHoc(generatorFn) {
             go();
         })
     }
+}*/
+
+// 不传参版本.
+const simpleGenHoc = (generator) => {
+    return new Promise((resolve, reject) => {
+        const g = generator();
+        const go = () => {
+            const next = g.next();
+            const { value, done } = next;
+            if (!done) {
+                Promise.resolve(value).then(() => {
+                    go()
+                });
+            } else {
+                resolve();
+            }
+        }
+        go();
+    })
 }
 
-const demo = genHoc(gen)
-demo().then((res) => {
-    console.log(res)
+const asyncDemo = simpleGenHoc(gen)
+asyncDemo.then(() => {
+    console.log('你好我是wss');
 })
 /**
  * 分析上述代码Generator提供控制权,Promise提供使用控制权的时机.
