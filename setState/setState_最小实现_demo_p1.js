@@ -35,6 +35,6 @@ class Component {
     }
 
     render() {
-        // 实现组件的渲染
+        // 实现组件的渲染.
     }
 }

@@ -15,25 +15,24 @@
     <div id="root"></div>
 </body>
 <script type="text/babel">
-
-    /*function Blog() {
-        this.state = {}
-        return (
-            <div>
-                <li>Test</li>
-                <button onClick=""></button>
-            </div>
-        )
-    }*/
+    // callback与dom的渲染顺序.
+    /* 在React中，setState函数的回调函数会在状态更新完成后立即被调用，而DOM渲染通常是在状态更新完成后立即开始的。
+    因此，可以说setState函数的回调函数和DOM渲染是几乎同步的。但是需要注意的是，由于React会对DOM操作进行批处理和优化，
+    因此DOM的渲染不一定会立即完成。例如，如果在回调函数中执行一些需要DOM节点的操作，那么这些操作可能需要等待DOM渲染完
+    成之后才能正确执行。另外，还有一些因素可能会影响回调函数和DOM渲染的执行时间。例如，如果组件树比较庞大，那么重新渲染
+    和DOM更新的时间就会相应地增加；如果在回调函数中执行的操作比较复杂，那么执行时间也会相应地增加。总之，setState函数
+    的回调函数和DOM渲染可以近似看作是同步的，但实际上它们之间的执行时间是有一定差异的，并且还受到其他因素的影响。*/
     class Blog extends React.Component {
         state = {
             index: 1
         }
+
         add = () => {
             this.setState({
                 index: 2
             }, () => {
                 alert(this.state.index)
+                // console.log(this.state.index)
             })
         }
 
@@ -47,7 +46,6 @@
                         {this.state.index}
                     </div>
                 </div>
-
             )
         }
     }
