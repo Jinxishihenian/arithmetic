@@ -201,7 +201,11 @@ document.getElementById('increment').addEventListener('click', function () {
 
 #### Middleware
 
-> Redux middleware 解决的问题与 Express 或 Koa middleware 不同，但在概念上是相似的。它在 dispatch action 的时候和 action 到达 reducer 那一刻之间提供了三方的逻辑拓展点。
+> Enhancers 非常强大，因为其可以覆盖或替换 store 的任何方法：dispatch、getState 和 subscribe。
+>
+> 但是，很多时候，我们只需要自定义 dispatch 的行为方式。 如果有一种方法可以在 dispatch运行时添加一些自定义行为，那就太好了。
+>
+> Redux 使用一种称为 middleware的特殊插件来让我们自定义dispatch 函数。Redux middleware 解决的问题与 Express 或 Koa middleware 不同，但在概念上是相似的。它在 dispatch action 的时候和 action 到达 reducer 那一刻之间提供了三方的逻辑拓展点。
 >
 > - Redux middleware 进行日志记录.
 > - 故障监控上报 .
