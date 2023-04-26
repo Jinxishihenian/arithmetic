@@ -275,8 +275,8 @@ const store = createStore(
 
 ##### Thunk函数
 
->
-> “thunk” 这个词是一个编程术语，意思是 "一段做延迟工作的代码".将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
+>“thunk” 这个词是一个编程术语，意思是 "一段做延迟工作的代码".
+> 将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
 
 ```js
 const logAndAdd = amount => {
@@ -411,9 +411,13 @@ export function Counter() {
 
 [上链接](https://cn.redux.js.org/tutorials/essentials/part-7-rtk-query-basics)
 
+[完整示例](https://codesandbox.io/s/github/reduxjs/redux-essentials-example-app/tree/checkpoint-5-createApi/?from-embed=&file=/src/features/posts/PostsList.js:1269-1282)
+
 ### Redux DevTools
 
 > Redux 专门设计用于更容易理解你的 state 何时、何地、为何以及如何随时间变化
+
+包含本地示例.
 
 #### 官方demo
 
