@@ -138,7 +138,7 @@ console.log(store.getState())
 
 
 
-#### redux数据流
+#### Redux数据流
 
 > 早些时候，我们谈到了“单向数据流”，它描述了更新应用程序的以下步骤序列：
 >
@@ -165,7 +165,11 @@ console.log(store.getState())
 
 ![ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26](C:\Users\Administrator\Desktop\redux-分享会\ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
 
-#### redux基础示例
+#### Redux基础示例
+
+[完整示例](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed=&file=/index.html:1713-1715)
+
+代码片段：
 
 ```
 // 1) 使用 `createStore` 函数创建 Redux store
@@ -197,7 +201,7 @@ document.getElementById('increment').addEventListener('click', function () {
 })
 ```
 
-[完整示例](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed=&file=/index.html:1713-1715)
+
 
 #### Middleware
 
@@ -213,9 +217,203 @@ document.getElementById('increment').addEventListener('click', function () {
 > - 路由.
 > - ......
 
+```js
+/**
+ * 打印每个 dispatch 的 action 和调用后的状态日志
+ */
+const logger = store => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  console.groupEnd()
+  return result
+}
+
+/**
+ * 报错的时候发送异常报告
+ */
+const crashReporter = store => next => action => {
+  try {
+    return next(action)
+  } catch (err) {
+    console.error('Caught an exception!', err)
+    Raven.captureException(err, {
+      extra: {
+        action,
+        state: store.getState()
+      }
+    })
+    throw err
+  }
+}
+
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+
+// 以下是如何将其应用于 Redux store 的例子：
+const todoApp = combineReducers(reducers)
+const store = createStore(
+  todoApp,
+  // applyMiddleware() 告诉 createStore() 如何处理 middlewares
+  applyMiddleware(logger, crashReporter)
+)
+```
+
+
+
 #### 异步逻辑和数据获取
 
+##### 使用 Middleware 处理异步逻辑
 
+> 就其本身而言，Redux store 对异步逻辑一无所知。它只知道如何同步 dispatch action，通过调用 root reducer 函数更新状态，并通知 UI 某些事情发生了变化。任何异步都必须发生在 store 之外。
+>
+> 最常见的异步 middleware 是 redux-thunk，它可以让你编写可能直接包含异步逻辑的普通函数。Redux Toolkit 的 configureStore 功能默认自动设置 thunk middleware，我们推荐使用 thunk 作为 Redux 开发异步逻辑的标准方式。
+>
+> 当引入异步逻辑时，我们添加了一个额外的步骤，middleware 可以运行像 AJAX 请求这样的逻辑，然后 dispatch action。这使得异步数据流看起来像这样：
+
+![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](E:\project\arithmetic\redux-分享会\ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
+
+##### Thunk函数
+
+>
+> “thunk” 这个词是一个编程术语，意思是 "一段做延迟工作的代码".将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
+
+```js
+const logAndAdd = amount => {
+  return (dispatch, getState) => {
+    const stateBefore = getState()
+    console.log(`Counter before: ${stateBefore.counter}`)
+    dispatch(incrementByAmount(amount))
+    const stateAfter = getState()
+    console.log(`Counter after: ${stateAfter.counter}`)
+  }
+}
+```
+
+### Redux最佳实践
+
+#### Redux Toolkit
+
+##### 1.创建Redux Store
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+export default configureStore({
+  reducer: {}
+})
+```
+
+##### 2.为 React 提供 Redux Store
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import store from './app/store'
+import { Provider } from 'react-redux'
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
+##### 3.创建 Redux State Slice
+
+> "slice"可以理解为将整个Redux store的状态进行切片，分割成不同的部分，每个部分只负责管理自己的状态。这样做的好处是可以避免整个Redux store变得过于庞大和不可维护，同时提高代码的可读性和可维护性。
+
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+export const counterSlice = createSlice({
+  name: 'counter',
+  initialState: {
+    value: 0
+  },
+  reducers: {
+    increment: state => {
+      // Redux Toolkit 允许我们在 reducers 写 "可变" 逻辑。它
+      // 并不是真正的改变状态值，因为它使用了 Immer 库
+      // 可以检测到“草稿状态“ 的变化并且基于这些变化生产全新的
+      // 不可变的状态
+      state.value += 1
+    },
+    decrement: state => {
+      state.value -= 1
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload
+    }
+  }
+})
+// 每个 case reducer 函数会生成对应的 Action creators
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+export default counterSlice.reducer
+```
+
+##### 4.将 Slice Reducers 添加到 Store 中
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from '../features/counter/counterSlice'
+
+export default configureStore({
+  reducer: {
+    counter: counterReducer
+  }
+})
+```
+
+##### 5.在 React 组件中使用 Redux 状态和操作
+
+```js
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './counterSlice'
+import styles from './Counter.module.css'
+
+export function Counter() {
+  const count = useSelector(state => state.counter.value)
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      <div>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+##### Redux演示
+
+[完整的计数器应用示例](https://codesandbox.io/s/github/reduxjs/redux-essentials-counter-example/tree/master/?from-embed)
+
+### RTK Query
+
+[上链接](https://cn.redux.js.org/tutorials/essentials/part-7-rtk-query-basics)
+
+### Redux DevTools
+
+> Redux 专门设计用于更容易理解你的 state 何时、何地、为何以及如何随时间变化
 
 #### 官方demo
 
