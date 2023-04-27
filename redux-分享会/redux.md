@@ -16,13 +16,20 @@
 
 #### UI与状态的解耦
 
-> UI 与状态的解耦是指将 UI 组件与状态数据分离，使得组件不依赖于状态数据的具体实现方式。在 Redux 中，状态数据存储在一个全局的存储库中，而 UI 组件则通过订阅状态来获取和响应状态的更改。这种解耦方式使得组件不必关心状态数据的来源和具体实现方式，从而使得组件更加灵活和可复用。
+> UI 与状态的解耦是指将 UI 组件与状态数据分离，使得组件不依赖于状态数据的具体实现方式。
+> 在 Redux 中，状态数据存储在一个全局的存储库中，而 UI 组件则通过订阅状态来获取和响应状态的更改。这种解耦方式使得组件不必关心状态数据的来源和具体实现方式，从而使得组件更加灵活和可复用。
+>
+> 使用Redux对React的UI和state进行解耦合，主要是将组件的状态（state）和行为（action）从UI组件中抽离出来，统一管理，使得组件的开发和维护更加方便和灵活。这样做的好处是，可以将组件的状态和行为从组件本身中解耦出来，使得组件更加独立，复用性更高，可维护性也更好。
+>
+> 虽然UI组件在使用Redux后仍然需要依赖state，但是它们不再直接管理和维护state的变化，而是通过Redux的机制来管理state的变化，并通过props将state和action传递给UI组件。这样做可以使得UI组件不再关心state的具体实现细节，只需要根据props中的数据来渲染UI即可，从而实现了UI和state的解耦合。
+>
+> 总之，使用Redux对React的UI和state进行解耦合，可以使得组件更加独立、复用性更高、可维护性更好，同时也可以提高代码的可测试性和可靠性。
 
 
 
 #### 易于测试
 
-> 1.方便写测试用例
+> 1.方便写测试用例.
 >
 > 2.Redux 提供了一些工具来帮助您调试应用程序。例如，您可以使用 Redux DevTools 来查看应用程序状态的历史记录和更改
 
@@ -259,8 +266,53 @@ const store = createStore(
 )
 ```
 
+#### Thunk函数
+##### 什么是Thunk
 
+> thunk 这个词是一个编程术语，意思是 "一段做延迟工作的代码"（thunk中的“延迟”指的是将代码的执行延迟到某些条件满足后再执行，通常用于处理异步操作）.
+> 将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
 
+##### 为什么使用 Thunk
+
+> Thunk 允许我们编写与 UI 层分开的额外的 Redux 相关逻辑。此逻辑可能包括副作用，例如异步请求或生成随机值，以及需要分派多个操作或访问 Redux 存储状态的逻辑。
+>
+> Redux reducer不得包含副作用，但实际应用程序需要具有副作用的逻辑。其中一些可能存在于组件内部，但有些可能需要存在于 UI 层之外。Thunks（和其他 Redux 中间件）为我们提供了放置这些副作用的地方。
+>
+> 直接在组件中包含逻辑是很常见的，例如在点击处理程序或挂钩中发出异步请求useEffect，然后处理结果。但是，通常需要将尽可能多的逻辑移到 UI 层之外。这样做可以提高逻辑的可测试性，使 UI 层尽可能薄和“表现”，或者提高代码重用和共享。
+>
+> 从某种意义上说，thunk 是一个漏洞，您可以在其中编写任何需要与 Redux 存储交互的代码，提前进行，而无需知道将使用哪个Redux 存储。这可以防止逻辑绑定到任何特定的 Redux 存储实例并使其可重用。
+
+##### 如何使用Thunk
+
+>  thunk函数是一个接受两个参数的函数：Redux storedispatch方法和 Redux storegetState方法。Thunk 函数不直接由应用程序代码调用。相反，它们被传递给store.dispatch()：
+
+```js
+// 调度 thunk 函数
+const thunkFunction = (dispatch, getState) => {
+  // logic here that can dispatch actions or read state
+}
+
+store.dispatch(thunkFunction)
+```
+
+##### 常见用法
+
+>- 将复杂的逻辑移出组件
+>- 发出异步请求或其他异步逻辑
+>- 编写需要连续或随时间分派多个操作的逻辑
+>- 编写需要访问以getState做出决策或在操作中包含其他状态值的逻辑
+
+```js
+const logAndAdd = amount => {
+  return (dispatch, getState) => {
+    const stateBefore = getState()
+    console.log(`Counter before: ${stateBefore.counter}`)
+    dispatch(incrementByAmount(amount))
+    const stateAfter = getState()
+    console.log(`Counter after: ${stateAfter.counter}`)
+  }
+}
+```
 #### 异步逻辑和数据获取
 
 ##### 使用 Middleware 处理异步逻辑
@@ -275,20 +327,7 @@ const store = createStore(
 
 ##### Thunk函数
 
->“thunk” 这个词是一个编程术语，意思是 "一段做延迟工作的代码".
-> 将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
 
-```js
-const logAndAdd = amount => {
-  return (dispatch, getState) => {
-    const stateBefore = getState()
-    console.log(`Counter before: ${stateBefore.counter}`)
-    dispatch(incrementByAmount(amount))
-    const stateAfter = getState()
-    console.log(`Counter after: ${stateAfter.counter}`)
-  }
-}
-```
 
 ### Redux最佳实践
 
