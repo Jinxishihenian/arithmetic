@@ -270,7 +270,6 @@ const store = createStore(
 ##### 什么是Thunk
 
 > thunk 这个词是一个编程术语，意思是 "一段做延迟工作的代码"（thunk中的“延迟”指的是将代码的执行延迟到某些条件满足后再执行，通常用于处理异步操作）.
-> 将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
 
 ##### 为什么使用 Thunk
 
@@ -284,6 +283,8 @@ const store = createStore(
 
 ##### 如何使用Thunk
 
+>  将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
+>
 >  thunk函数是一个接受两个参数的函数：Redux storedispatch方法和 Redux storegetState方法。Thunk 函数不直接由应用程序代码调用。相反，它们被传递给store.dispatch()：
 
 ```js
