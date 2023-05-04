@@ -2,19 +2,19 @@
 
 ### Redux解决了什么问题
 
-#### 状态管理
+- 状态管理
 
 > Redux 提供了一个全局的存储库，用于存储应用程序的状态。
 
 
 
-#### 状态可预测性
+- 状态可预测性
 
 > 在 Redux 中，状态是只读的，不能直接修改。在 Redux 中，每个操作都是明确的，因此您可以轻松地跟踪状态的更改并调试应用程序。
 
 
 
-#### UI与状态的解耦
+- UI与状态的解耦
 
 > UI 与状态的解耦是指将 UI 组件与状态数据分离，使得组件不依赖于状态数据的具体实现方式。
 > 在 Redux 中，状态数据存储在一个全局的存储库中，而 UI 组件则通过订阅状态来获取和响应状态的更改。这种解耦方式使得组件不必关心状态数据的来源和具体实现方式，从而使得组件更加灵活和可复用。
@@ -27,13 +27,11 @@
 
 
 
-#### 易于测试
+- 易于测试
 
 > 1.方便写测试用例.
 >
 > 2.Redux 提供了一些工具来帮助您调试应用程序。例如，您可以使用 Redux DevTools 来查看应用程序状态的历史记录和更改
-
-
 
 
 
@@ -178,7 +176,7 @@ console.log(store.getState())
 
 代码片段：
 
-```
+```js
 // 1) 使用 `createStore` 函数创建 Redux store
 const store = Redux.createStore(counterReducer)
 
@@ -212,80 +210,69 @@ document.getElementById('increment').addEventListener('click', function () {
 
 #### Middleware
 
-> Enhancers 非常强大，因为其可以覆盖或替换 store 的任何方法：dispatch、getState 和 subscribe。
+##### Middleware简介
+
+> Redux 使用一种称为 middleware 的特殊插件来让我们自定义 dispatch 函数。 如果你曾经使用过 Express 或 Koa 之类的库，那么你可能已经熟悉添加 middleware 来自定义行为的想法。在这些框架中，middleware 是你可以放置在接收请求和生成响应之间的一些代码。例如，Express 或 Koa middleware 可能会添加 CORS 标头、日志记录、压缩等。middleware 的最大特点是它可以组合成一个链。你可以在单个项目中使用多个独立的第三方 middleware。 Redux middleware 解决了与 Express 或 Koa middleware 不同的问题，但在概念上是以相似的方式。Redux middleware 在 dispatch action 和到达 reducer 之间提供第三方扩展点。
 >
-> 但是，很多时候，我们只需要自定义 dispatch 的行为方式。 如果有一种方法可以在 dispatch运行时添加一些自定义行为，那就太好了。
->
-> Redux 使用一种称为 middleware的特殊插件来让我们自定义dispatch 函数。Redux middleware 解决的问题与 Express 或 Koa middleware 不同，但在概念上是相似的。它在 dispatch action 的时候和 action 到达 reducer 那一刻之间提供了三方的逻辑拓展点。
->
-> - Redux middleware 进行日志记录.
-> - 故障监控上报 .
-> - 异步 API 通信.
-> - 路由.
-> - ......
+>  人们使用 Redux middleware 进行日志记录、崩溃报告、异步 API 通信、路由等。 首先，我们将了解如何将 middleware 添加到 store 中，然后将展示如何编写自己的 middleware。
 
-```js
-/**
- * 打印每个 dispatch 的 action 和调用后的状态日志
- */
-const logger = store => next => action => {
-  console.group(action.type)
-  console.info('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd()
-  return result
-}
+##### 使用Middleware
 
-/**
- * 报错的时候发送异常报告
- */
-const crashReporter = store => next => action => {
-  try {
-    return next(action)
-  } catch (err) {
-    console.error('Caught an exception!', err)
-    Raven.captureException(err, {
-      extra: {
-        action,
-        state: store.getState()
-      }
-    })
-    throw err
-  }
-}
+> 你可以使用 store enhancers 自定义 Redux store。Redux Middleware 实际上是在 Redux 内置的一个非常特殊的 store enhancer 之上实现的，称为 applyMiddleware。 由于我们已经知道如何将 enhancers 添加到 store，现在应该能够做到这一点。我们将从 applyMiddleware 本身开始，将添加三个已包含在此项目中的示例 middleware。
 
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+```jsx
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './reducer'
+import { print1, print2, print3 } from './exampleAddons/middleware'
 
-// 以下是如何将其应用于 Redux store 的例子：
-const todoApp = combineReducers(reducers)
-const store = createStore(
-  todoApp,
-  // applyMiddleware() 告诉 createStore() 如何处理 middlewares
-  applyMiddleware(logger, crashReporter)
-)
+const middlewareEnhancer = applyMiddleware(print1, print2, print3)
+
+// 将 enhancer 为第二参数，因为没有 preloadedState
+const store = createStore(rootReducer, middlewareEnhancer)
+
+export default store
 ```
 
 #### Thunk函数
-##### 什么是Thunk
+##### Thunk简介
 
+> **编程中的Thunk**
+>
 > thunk 这个词是一个编程术语，意思是 "一段做延迟工作的代码"（thunk中的“延迟”指的是将代码的执行延迟到某些条件满足后再执行，通常用于处理异步操作）.
+>
+> **Redux中的Thunk**
+>
+> 具体对于 Redux，“thunks”是一种编写函数的模式，其中包含可以与 Redux storedispatch和getStatemethods交互的逻辑.
+>
+> Thunk 是在 Redux 应用程序中编写异步逻辑的标准方法，通常用于数据获取.但是，它们可以用于各种任务，并且可以同时包含同步和异步逻辑。
+
+
 
 ##### 为什么使用 Thunk
 
-> Thunk 允许我们编写与 UI 层分开的额外的 Redux 相关逻辑。此逻辑可能包括副作用，例如异步请求或生成随机值，以及需要分派多个操作或访问 Redux 存储状态的逻辑。
->
-> Redux reducer不得包含副作用，但实际应用程序需要具有副作用的逻辑。其中一些可能存在于组件内部，但有些可能需要存在于 UI 层之外。Thunks（和其他 Redux 中间件）为我们提供了放置这些副作用的地方。
->
-> 直接在组件中包含逻辑是很常见的，例如在点击处理程序或挂钩中发出异步请求useEffect，然后处理结果。但是，通常需要将尽可能多的逻辑移到 UI 层之外。这样做可以提高逻辑的可测试性，使 UI 层尽可能薄和“表现”，或者提高代码重用和共享。
->
-> 从某种意义上说，thunk 是一个漏洞，您可以在其中编写任何需要与 Redux 存储交互的代码，提前进行，而无需知道将使用哪个Redux 存储。这可以防止逻辑绑定到任何特定的 Redux 存储实例并使其可重用。
+因为Thunks具备以下特点:
+
+- Thunk 允许我们编写与 UI 层分开的额外的 Redux 相关逻辑.
+
+-  Redux reducer不得包含副作用，但实际应用程序需要具有副作用的逻辑。Thunks（和其他 Redux 中间件）为我们提供了放置这些副作用的地方.
+
+具有该特点之后有什么好处:
+
+- 尽可能多的逻辑移到 UI 层之外。这样做可以提高逻辑的可测试性，使 UI 层尽可能薄和“表现”，或者提高代码重用和共享.
+
+- 您可以在其中编写任何需要与 Redux 存储交互的代码，提前进行，而无需知道将使用哪个Redux 存储。这可以防止逻辑绑定到任何特定的 Redux 存储实例并使其可重用.
+
+
 
 ##### 如何使用Thunk
 
->  将 thunk middleware 添加到 Redux store 后，它允许你将 thunk 函数 直接传递给 store.dispatch.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.
->
->  thunk函数是一个接受两个参数的函数：Redux storedispatch方法和 Redux storegetState方法。Thunk 函数不直接由应用程序代码调用。相反，它们被传递给store.dispatch()：
+1.首先使用 thunk 需要将redux-thunk中间件作为其配置的一部分添加到 Redux 存储中,将 thunk middleware 添加到 Redux store 后,它允许你将 thunk 函数直接传递给store.dispatch.
+
+```
+
+```
+
+2.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.thunk函数是一个接受两个参数的函数：Redux storedispatch方法和 Redux storegetState方法。Thunk 函数不直接由应用程序代码调用。相反，它们被传递给store.dispatch().thunk 函数可以包含任意逻辑、同步或异步，并且可以随时调用dispatch或调用getState. 
 
 ```js
 // 调度 thunk 函数
@@ -296,37 +283,110 @@ const thunkFunction = (dispatch, getState) => {
 store.dispatch(thunkFunction)
 ```
 
-##### 常见用法
-
->- 将复杂的逻辑移出组件
->- 发出异步请求或其他异步逻辑
->- 编写需要连续或随时间分派多个操作的逻辑
->- 编写需要访问以getState做出决策或在操作中包含其他状态值的逻辑
+3.就像 Redux 代码通常使用action creators 来生成用于调度的 action 对象而不是手动编写 action 对象一样，我们通常使用thunk action creators来生成被调度的 thunk 函数.
 
 ```js
-const logAndAdd = amount => {
-  return (dispatch, getState) => {
-    const stateBefore = getState()
-    console.log(`Counter before: ${stateBefore.counter}`)
-    dispatch(incrementByAmount(amount))
-    const stateAfter = getState()
-    console.log(`Counter after: ${stateAfter.counter}`)
+// fetchTodoById is the "thunk action creator"
+export function fetchTodoById(todoId) {
+  // fetchTodoByIdThunk is the "thunk function"
+  return async function fetchTodoByIdThunk(dispatch, getState) {
+    const response = await client.get(`/fakeApi/todo/${todoId}`)
+    dispatch(todosLoaded(response.todos))
+  }
+}
+
+function TodoComponent({ todoId }) {
+  const dispatch = useDispatch()
+
+  const onFetchClicked = () => {
+    // Calls the thunk action creator, and passes the thunk function to dispatch
+    dispatch(fetchTodoById(todoId))
   }
 }
 ```
+
+
+
+##### 常见用法
+
+- 将复杂的逻辑移出组件
+
+- 发出异步请求或其他异步逻辑
+
+- 编写需要连续或随时间分派多个操作的逻辑
+
+- 编写需要访问以getState做出决策或在操作中包含其他状态值的逻辑
+
+
+
 #### 异步逻辑和数据获取
 
-##### 使用 Middleware 处理异步逻辑
+##### 如何进行异步数据请求
 
 > 就其本身而言，Redux store 对异步逻辑一无所知。它只知道如何同步 dispatch action，通过调用 root reducer 函数更新状态，并通知 UI 某些事情发生了变化。任何异步都必须发生在 store 之外。
 >
 > 最常见的异步 middleware 是 redux-thunk，它可以让你编写可能直接包含异步逻辑的普通函数。Redux Toolkit 的 configureStore 功能默认自动设置 thunk middleware，我们推荐使用 thunk 作为 Redux 开发异步逻辑的标准方式。
->
+
+##### **具体步骤**
+
+- Redux 有多种异步 middleware，每一种都允许你使用不同的语法编写逻辑。最常见的异步 middleware 是 redux-thunk，它可以让你编写可能直接包含异步逻辑的普通函数。
+- 编写 async thunk 的代码
+
+```js
+const getRepoDetailsStarted = () => ({
+  type: 'repoDetails/fetchStarted'
+})
+const getRepoDetailsSuccess = repoDetails => ({
+  type: 'repoDetails/fetchSucceeded',
+  payload: repoDetails
+})
+const getRepoDetailsFailed = error => ({
+  type: 'repoDetails/fetchFailed',
+  error
+})
+const fetchIssuesCount = (org, repo) => async dispatch => {
+  dispatch(getRepoDetailsStarted())
+  try {
+    const repoDetails = await getRepoDetails(org, repo)
+    dispatch(getRepoDetailsSuccess(repoDetails))
+  } catch (err) {
+    dispatch(getRepoDetailsFailed(err.toString()))
+  }
+}
+```
+
+##### 流程解析
+
 > 当引入异步逻辑时，我们添加了一个额外的步骤，middleware 可以运行像 AJAX 请求这样的逻辑，然后 dispatch action。这使得异步数据流看起来像这样：
 
 ![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](E:\project\arithmetic\redux-分享会\ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
 
-##### Thunk函数
+典型的 async thunk 的代码
+
+```js
+const getRepoDetailsStarted = () => ({
+  type: 'repoDetails/fetchStarted'
+})
+const getRepoDetailsSuccess = repoDetails => ({
+  type: 'repoDetails/fetchSucceeded',
+  payload: repoDetails
+})
+const getRepoDetailsFailed = error => ({
+  type: 'repoDetails/fetchFailed',
+  error
+})
+const fetchIssuesCount = (org, repo) => async dispatch => {
+  dispatch(getRepoDetailsStarted())
+  try {
+    const repoDetails = await getRepoDetails(org, repo)
+    dispatch(getRepoDetailsSuccess(repoDetails))
+  } catch (err) {
+    dispatch(getRepoDetailsFailed(err.toString()))
+  }
+}
+```
+
+
 
 
 
@@ -346,7 +406,7 @@ export default configureStore({
 
 ##### 2.为 React 提供 Redux Store
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
