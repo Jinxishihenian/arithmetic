@@ -172,8 +172,6 @@ console.log(store.getState())
 
 #### Redux基础示例
 
-[完整示例](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed=&file=/index.html:1713-1715)
-
 代码片段：
 
 ```js
@@ -208,32 +206,101 @@ document.getElementById('increment').addEventListener('click', function () {
 
 
 
+线上：[完整示例](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed=&file=/index.html:1713-1715)
+
+本地：base_0
+
 #### Middleware
 
 ##### Middleware简介
 
-> Redux 使用一种称为 middleware 的特殊插件来让我们自定义 dispatch 函数。 如果你曾经使用过 Express 或 Koa 之类的库，那么你可能已经熟悉添加 middleware 来自定义行为的想法。在这些框架中，middleware 是你可以放置在接收请求和生成响应之间的一些代码。例如，Express 或 Koa middleware 可能会添加 CORS 标头、日志记录、压缩等。middleware 的最大特点是它可以组合成一个链。你可以在单个项目中使用多个独立的第三方 middleware。 Redux middleware 解决了与 Express 或 Koa middleware 不同的问题，但在概念上是以相似的方式。Redux middleware 在 dispatch action 和到达 reducer 之间提供第三方扩展点。
+> Redux 使用一种称为 middleware 的特殊插件来让我们自定义 dispatch 函数。
 >
->  人们使用 Redux middleware 进行日志记录、崩溃报告、异步 API 通信、路由等。 首先，我们将了解如何将 middleware 添加到 store 中，然后将展示如何编写自己的 middleware。
+> 如果你曾经使用过 Express 或 Koa 之类的库，那么你可能已经熟悉添加 middleware 来自定义行为的想法。在这些框架中，middleware 是你可以放置在接收请求和生成响应之间的一些代码。例如，Express 或 Koa middleware 可能会添加 CORS 标头、日志记录、压缩等。
+>
+> middleware 的最大特点是它可以组合成一个链。你可以在单个项目中使用多个独立的第三方 middleware。 Redux middleware 解决了与 Express 或 Koa middleware 不同的问题，但在概念上是以相似的方式。Redux middleware 在 dispatch action 和到达 reducer 之间提供第三方扩展点。
+>
+> 人们使用 Redux middleware 进行日志记录、崩溃报告、异步 API 通信、路由等。 首先，我们将了解如何将 middleware 添加到 store 中，然后将展示如何编写自己的 middleware。
 
-##### 使用Middleware
+##### 如何使用Middleware
 
-> 你可以使用 store enhancers 自定义 Redux store。Redux Middleware 实际上是在 Redux 内置的一个非常特殊的 store enhancer 之上实现的，称为 applyMiddleware。 由于我们已经知道如何将 enhancers 添加到 store，现在应该能够做到这一点。我们将从 applyMiddleware 本身开始，将添加三个已包含在此项目中的示例 middleware。
+> 你可以使用 store enhancers 自定义 Redux store。
+>
+> Redux Middleware 实际上是在 Redux 内置的一个非常特殊的 store enhancer 之上实现的，称为 applyMiddleware。
+
+1. 自定义middleware
+
+```js
+const anotherExampleMiddleware = storeAPI => next => action => {
+  // 当每个 action 都被 dispatch 时，在这里做一些事情
+  return next(action)
+}
+```
+
+
+
+2. 添加 middleware
 
 ```jsx
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducer'
 import { print1, print2, print3 } from './exampleAddons/middleware'
 
+const print1 = storeAPI => next => action => {
+  console.log('log:','1')
+  return next(action)
+}
+
+const print2 = storeAPI => next => action => {
+  console.log('log:','2')
+  return next(action)
+}
+
+const print3 = storeAPI => next => action => {
+  console.log('log:','3')
+  return next(action)
+}
+
+// applyMiddleware 的作用是将多个中间件串联起来，形成一个中间件链
 const middlewareEnhancer = applyMiddleware(print1, print2, print3)
 
+/** enhancer (Function): Store enhancer。你可以选择指定它以使用第三方功能，如middleware、时间旅行、持久化来增强 store。Redux 中唯一内置的 store enhander 是 applyMiddleware()。**/
 // 将 enhancer 为第二参数，因为没有 preloadedState
 const store = createStore(rootReducer, middlewareEnhancer)
 
 export default store
 ```
 
+```js
+import store from './store'
+
+store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
+// log: '1'
+// log: '2'
+// log: '3'
+```
+
+
+
+##### Middleware基础示例
+
+所以我们可以用中间件做很多事！
+
+当一个 middleware 遇到 dispatch 一个 action 时，它可以做到任何想做的事：
+
+- 将某些内容记录到控制台
+- 设置定时
+- 进行异步 API 调用
+- 修改 action
+- 暂停 action，甚至完全停止
+- ......
+
+本地：base_1
+
+
+
 #### Thunk函数
+
 ##### Thunk简介
 
 > **编程中的Thunk**
