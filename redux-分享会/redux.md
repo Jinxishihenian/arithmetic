@@ -459,7 +459,7 @@ const fetchIssuesCount = (org, repo) => async dispatch => {
 
 ### Redux最佳实践
 
-#### Redux Toolkit
+#### Redux Toolkit用例
 
 ##### 1.创建Redux Store
 
@@ -538,7 +538,7 @@ export default configureStore({
 
 ##### 5.在 React 组件中使用 Redux 状态和操作
 
-```js
+```jsx
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './counterSlice'
@@ -570,9 +570,15 @@ export function Counter() {
 }
 ```
 
+##### Redux Toolkit基础示例
+
+本地:base_1
+
 ### RTK Query
 
-> 可参考React-Query.
+##### 文档说明
+
+[线上文档](https://cn.redux.js.org/tutorials/essentials/part-7-rtk-query-basics#rtk-query-%E7%BC%93%E5%AD%98%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3)
 
 ##### RTK Query基础示例
 
@@ -580,21 +586,13 @@ export function Counter() {
 
 ### Redux DevTools
 
-> Redux 专门设计用于更容易理解你的 state 何时、何地、为何以及如何随时间变化
+##### 文档说明
 
-##### Redux DevTools基础示例
+[线上文档](https://cn.redux.js.org/tutorials/fundamentals/part-4-store#redux-devtools)
+
+##### Redux DevTools 基础示例
 
 本地:base_1
-
-#### 官方demo
-
-[Redux-Toolkit(完整的计数器应用示例)](https://codesandbox.io/s/github/reduxjs/redux-essentials-counter-example/tree/master/?from-embed)
-
-[Redux最小实现]()
-
-[Redux基础版本](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed)
-
-[RTK Query](https://codesandbox.io/s/github/reduxjs/redux-toolkit/tree/master/examples/query/react/basic?from-embed=&file=/src/App.tsx)
 
 
 
