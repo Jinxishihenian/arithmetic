@@ -570,19 +570,21 @@ export function Counter() {
 }
 ```
 
-##### Redux演示
-
-[完整的计数器应用示例](https://codesandbox.io/s/github/reduxjs/redux-essentials-counter-example/tree/master/?from-embed)
-
 ### RTK Query
 
 > 可参考React-Query.
+
+##### RTK Query基础示例
+
+[线上示例](https://codesandbox.io/s/github/reduxjs/redux-essentials-example-app/tree/checkpoint-5-createApi/?from-embed)
 
 ### Redux DevTools
 
 > Redux 专门设计用于更容易理解你的 state 何时、何地、为何以及如何随时间变化
 
-包含本地示例.
+##### Redux DevTools基础示例
+
+本地:base_1
 
 #### 官方demo
 
