@@ -576,9 +576,7 @@ export function Counter() {
 
 ### RTK Query
 
-[上链接](https://cn.redux.js.org/tutorials/essentials/part-7-rtk-query-basics)
-
-[完整示例](https://codesandbox.io/s/github/reduxjs/redux-essentials-example-app/tree/checkpoint-5-createApi/?from-embed=&file=/src/features/posts/PostsList.js:1269-1282)
+> 可参考React-Query.
 
 ### Redux DevTools
 
