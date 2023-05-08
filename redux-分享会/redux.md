@@ -1,6 +1,6 @@
 # Redux分享会
 
-### Redux解决了项目中什么痛点
+### Redux解决了什么问题
 
 - 状态管理
 
@@ -354,8 +354,14 @@ store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
 
 1.首先使用 thunk 需要将redux-thunk中间件作为其配置的一部分添加到 Redux 存储中,将 thunk middleware 添加到 Redux store 后,它允许你将 thunk 函数直接传递给store.dispatch.
 
-```
+```js
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
+const store = createStore(
+    reducers, 
+    applyMiddleware(thunk)
+);
 ```
 
 2.调用 thunk 函数时总是将 (dispatch, getState) 作为它的参数，你可以根据需要在 thunk 中使用它们.thunk函数是一个接受两个参数的函数：Redux storedispatch方法和 Redux storegetState方法。Thunk 函数不直接由应用程序代码调用。相反，它们被传递给store.dispatch().thunk 函数可以包含任意逻辑、同步或异步，并且可以随时调用dispatch或调用getState. 
@@ -613,5 +619,17 @@ export function Counter() {
 
 本地:base_1
 
+### 总结
 
+结合实际,使用redux解决了项目中的那些痛点？
+
+- 多级组件间通信困难，难以实现组件复用.
+- 有助于整个团队的代码设计风格一致.
+- 数据埋点/日志记录.
+- 结合sentry完成,错误日志记录,用户行为分析,性能监控,版本控制,实时监控.
+- 操作权限统一管理.
+- 帮助我们完成代码分层,视图层,状态层,数据层.
+- Redux结合React Router可以更好地管理和控制路由状态和逻辑，以提升应用的可维护性、可扩展性和可测试性,结合实际来说1.路由权限控制 2.路由的状态管理(当前路由的路径,当前路由参数,路由变化的动作类型,路由变化前变化后的状态) 3.路由的动画效果.
+- 增强项目代码的可读性,可维护性.
+- 可以帮我们完成洋葱模型,专注于业务逻辑;使用中间件可以使我们专注于业务逻辑,而将繁琐的非业务逻辑抽离出来交给中间件来处理.通过将非业务逻辑(异步请求处理,日志记录和调试信息,路由控制和权限处理管理,错误处理和异常捕获,数据缓存和存储)与业务逻辑分离,我们可以更好的掌握应用的复杂的和可维护性,以提高应用开发的效率和质量.
 

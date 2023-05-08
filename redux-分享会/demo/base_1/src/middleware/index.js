@@ -1,4 +1,4 @@
-// 中间件示例.
+// 中间件demo.
 /**
  * 打印每个 dispatch 的 action 和调用后的状态日志
  */
@@ -28,4 +28,20 @@ export const crashReporter = store => next => action => {
         })*/
         throw err
     }
+}
+
+/**
+ * 中间件用于用户操作的权限判断.
+ */
+export const userPermissionMiddleware = (store) => (next) => (action) => {
+    // const { user } = store.getState().auth;// 获取用户信息.
+    const authList = ['decrement', 'increment'];
+    // 获取action中定义的需要的权限.
+    const { requiredPermission } = action?.payload?.meta || {};
+
+    if (requiredPermission && !authList.includes(requiredPermission)) {
+        // 如果用户没有权限，则拦截action并返回错误.
+        return Promise.reject(new Error('您没有此操作的权限'));
+    }
+    return next(action);
 }

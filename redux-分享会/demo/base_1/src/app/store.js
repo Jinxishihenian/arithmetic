@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
-import { crashReporter, logger } from '../middleware';
+import { crashReporter, logger, userPermissionMiddleware } from '../middleware';
 
 export const store = configureStore({
     reducer: {
@@ -11,5 +11,7 @@ export const store = configureStore({
         logger,
         // 异常上报中间件.
         crashReporter,
+        // 权限校验中间件.
+        userPermissionMiddleware,
     ),
 });
