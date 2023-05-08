@@ -55,7 +55,7 @@ export function Counter() {
                             incrementByAmount({
                                     value: incrementValue,
                                     // 当包含requiredPermission时进行权限判断.
-                                    meta: { 'requiredPermission': 'decrement' }
+                                    meta: { 'requiredPermission': 'decrement1' }
                                 }
                             )
                         )
