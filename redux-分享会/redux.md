@@ -245,7 +245,7 @@ console.log(store.getState())
 > - 初始启动：
 >   - 使用最顶层的 root reducer 函数创建 Redux store
 >   - store 调用一次 root reducer，并将返回值保存为它的初始 `state`
->   - 当视图 首次渲染时，视图组件访问 Redux store 的当前 state，并使用该数据来决定要呈现的内容。同时监听 store 的更新，以便他们可以知道 state 是否已更改。
+>   - 当视图首次渲染时，视图组件访问 Redux store 的当前 state，并使用该数据来决定要呈现的内容。同时监听 store 的更新，以便他们可以知道 state 是否已更改。
 >- 更新环节：
 >   - 应用程序中发生了某些事情，例如用户单击按钮
 >  - dispatch 一个 action 到 Redux store，例如 `dispatch({type: 'counter/increment'})`
@@ -397,9 +397,7 @@ store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
 >
 > **Redux中的Thunk**
 >
-> Thunk本身也是一种middleware.
->
-> 具体对于 Redux，“thunks”是一种编写函数的模式，其中包含可以与 Redux storedispatch和getStatemethods交互的逻辑.
+> 具体对于 Redux，“thunks”是一种编写函数的模式，其中包含可以与 Redux store dispatch和getState交互的逻辑.
 >
 > Thunk 是在 Redux 应用程序中编写异步逻辑的标准方法，通常用于数据获取.但是，它们可以用于各种任务，并且可以同时包含同步和异步逻辑。
 >
