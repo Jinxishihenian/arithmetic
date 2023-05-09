@@ -4,7 +4,7 @@
 
 - 状态管理
 
-> Redux 提供了一个全局的存储库，用于存储应用和管理程序的状态。
+> Redux 提供了一个全局的存储库，用于存储应用并管理程序的状态。
 
 - 状态可预测性
 
@@ -23,18 +23,20 @@
 
 
 
-- 易于测试
+- 易于测试与调试 
 
-> 1.方便写测试用例.
->
-> Redux 的易于测试特点主要体现在以下几个方面：
->
-> 1. 单一数据源：Redux 应用程序的状态被保存在一个全局的 Store 中，这种设计使得状态的变化变得可预测和可控，方便编写测试用例。
-> 2. 纯函数：Redux 的 Reducer 是纯函数，它只接受当前的状态和一个 Action，返回一个新的状态。这种设计使得 Reducer 的行为变得可预测和可测试。
-> 3. 易于模拟：Redux 的中间件机制使得副作用操作可以被抽象出来，并且可以通过模拟来测试。例如，可以使用 Redux-mock-store 模拟 Redux Store，使用 Nock 模拟网络请求，从而测试异步操作。
-> 4. 易于分离：Redux 应用程序的业务逻辑和 UI 逻辑被分离开来，这种设计使得业务逻辑可以被轻松地测试，而无需关心 UI 相关的操作。
-> 
->2.Redux 提供了一些工具来帮助您调试应用程序。例如，您可以使用 Redux DevTools 来查看应用程序状态的历史记录和更改.
+  * 方便写测试用例
+
+  > Redux 的易于测试特点主要体现在以下几个方面：
+  >
+  > 1. 单一数据源：当一个 Redux 应用程序的状态被保存在一个全局的 Store 中时，这个状态就变得可预测和可控了，因为在 Redux 中，状态是只读的，只能通过 dispatch action 来更新状态，每个 action 都会对应一个 reducer，这个 reducer 负责计算新的 state 并返回给 Store，这样就保证了状态更新的可控性和可预测性。
+  > 2. 纯函数：Redux 的 Reducer 是纯函数，它只接受当前的状态和一个 Action，返回一个新的状态。这种设计使得 Reducer 的行为变得可预测和可测试。
+  > 3. 易于模拟：Redux 的中间件机制使得副作用操作可以被抽象出来，并且可以通过模拟来测试。例如，可以使用 Redux-mock-store 模拟 Redux Store，使用 Nock 模拟网络请求，从而测试异步操作。
+  > 4. 易于分离：Redux 应用程序的业务逻辑和 UI 逻辑被分离开来，这种设计使得业务逻辑可以被轻松地测试，而无需关心 UI 相关的操作。
+
+  * Redux 提供了一些工具来帮助您调试应用程序
+
+  > 例如，您可以使用 Redux DevTools 来查看应用程序状态的历史记录和更改.
 
 
 
@@ -53,15 +55,15 @@
 
 #### Redux概述
 
-> Redux 是 JavaScript 应用的状态容器，提供可预测的状态管理.Redux 是一个使用叫作 "actions" 的事件去管理和更新应用状态的模式和工具库。 它以集中式 Store（centralized store）的方式对整个应用中使用的状态进行集中管理，其规则确保状态只能以可预测的方式更新。
+Redux 是 JavaScript 应用的状态容器，提供可预测的状态管理.Redux 是一个使用叫作 "actions" 的事件去管理和更新应用状态的模式和工具库。 它以集中式 Store（centralized store）的方式对整个应用中使用的状态进行集中管理，其规则确保状态只能以可预测的方式更新。
 
 #### 为什么要用Redux
 
-> Redux 提供的模式和工具使你更容易理解应用程序中的状态何时、何地、为什么以及如何更新，以及当这些更改发生时你的应用程序逻辑将如何表现。 Redux 指导你编写可预测和可测试的代码，这有助于让你确信你的应用程序将按预期工作。
+Redux 提供的模式和工具使你更容易理解应用程序中的状态何时、何地、为什么以及如何更新，以及当这些更改发生时你的应用程序逻辑将如何表现。 Redux 指导你编写可预测和可测试的代码，这有助于让你确信你的应用程序将按预期工作。
 
 #### Redux最小实现
 
-> 发布-订阅模式
+> redux借鉴了发布-订阅模式
 
 ```js
 /*增加一个参数 reducer*/
@@ -135,7 +137,7 @@ store.dispatch({
 
 ##### Action
 
-**action 是一个具有 type 字段的普通 JavaScript 对象。你可以将 action 视为描述应用程序中发生了什么的事件**.
+action 是一个具有 type 字段的普通 JavaScript 对象。你可以将 action 视为描述应用程序中发生了什么的事件.
 
 > type 字段是一个字符串，给这个 action 一个描述性的名字，比如"todos/todoAdded"。我们通常把那个类型的字符串写成“域/事件名称”，其中第一部分是这个 action 所属的特征或类别，第二部分是发生的具体事情。
 >
@@ -145,14 +147,16 @@ store.dispatch({
 
 ```javascript
 const addTodoAction = {
+  // 描述action名称. 
   type: 'todos/todoAdded',
+  // 描述具体发生的事情.  
   payload: 'Buy milk'
 }
 ```
 
 ##### Reducers
 
-**你可以将 reducer 视为一个事件监听器，它根据接收到的 action（事件）类型处理事件.**
+你可以将 reducer 视为一个事件监听器，它根据接收到的 action（事件）类型处理事件.
 
 > reducer 是一个函数，接收当前的 `state` 和一个 `action` 对象，必要时决定如何更新状态，并返回新状态。函数签名是：`(state, action) => newState`。 
 >
@@ -162,12 +166,13 @@ const addTodoAction = {
 > - 禁止直接修改 `state`。必须通过复制现有的 `state` 并对复制的值进行更改的方式来做 *不可变更新（immutable updates）*。
 > - 禁止任何异步逻辑、依赖随机值或导致其他“副作用”的代码
 >
-> 下面是 reducer 的小例子，展示了每个 reducer 应该遵循的步骤：
+
+下面是 reducer 的小例子，展示了每个 reducer 应该遵循的步骤：
 
 ```js
 const initialState = { value: 0 }
 
-function counterReducer(state = initialState, action) {
+function Reducer(state = initialState, action) {
   // 检查 reducer 是否关心这个 action
   if (action.type === 'counter/increment') {
     // 如果是，复制 `state`
@@ -184,7 +189,7 @@ function counterReducer(state = initialState, action) {
 
 ##### Store
 
-**Redux 应用的状态存在于一个名为 store 的对象中.**
+Redux 应用的状态存在于一个名为 store 的对象中.
 
 > store 是通过传入一个 reducer 来创建的，并且有一个名为 `getState` 的方法，它返回当前状态值：
 
@@ -230,6 +235,8 @@ console.log(store.getState())
 
 **单向数据流**
 
+数据流
+
 > 早些时候，我们谈到了“单向数据流”，它描述了更新应用程序的以下步骤序列：
 >
 > - state 描述了应用程序在特定时间点的状况
@@ -238,7 +245,7 @@ console.log(store.getState())
 > - 基于新的 state 重新渲染视图
 >
 
-
+redux中的数据流
 
 > 具体来说，对于 Redux，我们可以将这些步骤分解为更详细的内容：
 >
@@ -251,14 +258,15 @@ console.log(store.getState())
 >  - dispatch 一个 action 到 Redux store，例如 `dispatch({type: 'counter/increment'})`
 >   - store 用之前的 `state` 和当前的 `action` 再次运行 reducer 函数，并将返回值保存为新的 `state`
 >   - store 通知所有订阅过的视图，通知它们 store 发生更新
->   - 每个订阅过 store 数据的视图 组件都会检查它们需要的 state 部分是否被更新。
+>   - 每个订阅过 store 数据的视图 组件都会检查它们需要的 state 部分是否被更新
 >   - 发现数据被更新的每个组件都强制使用新数据重新渲染，紧接着更新网页
 > 
-> 动画的方式来表达数据流更新：
+
+动画的方式来表达数据流更新：
 
 ![ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26](C:\Users\Administrator\Desktop\redux-分享会\ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
 
-#### Redux基础示例
+#### Redux用法基础示例
 
 代码片段：
 
@@ -302,13 +310,28 @@ document.getElementById('increment').addEventListener('click', function () {
 
 ##### Middleware简介
 
+**Redux middleware 在 dispatch action 和到达 reducer 之间提供第三方扩展点。**
+
 > Redux 使用一种称为 middleware 的特殊插件来让我们自定义 dispatch 函数。
 >
 > 如果你曾经使用过 Express 或 Koa 之类的库，那么你可能已经熟悉添加 middleware 来自定义行为的想法。在这些框架中，middleware 是你可以放置在接收请求和生成响应之间的一些代码。例如，Express 或 Koa middleware 可能会添加 CORS 标头、日志记录、压缩等。
 >
-> middleware 的最大特点是它可以组合成一个链。你可以在单个项目中使用多个独立的第三方 middleware。 Redux middleware 解决了与 Express 或 Koa middleware 不同的问题，但在概念上是以相似的方式。Redux middleware 在 dispatch action 和到达 reducer 之间提供第三方扩展点。
+> middleware 的最大特点是它可以组合成一个链。你可以在单个项目中使用多个独立的第三方 middleware。 Redux middleware 解决了与 Express 或 Koa middleware 不同的问题，但在概念上是以相似的方式。
 >
 > 人们使用 Redux middleware 进行日志记录、崩溃报告、异步 API 通信、路由等。 首先，我们将了解如何将 middleware 添加到 store 中，然后将展示如何编写自己的 middleware。
+
+```js
+  function dispatch(action) {
+    // 中间件逻辑在这个位置.
+    state = reducer(state, action);
+    for (let i = 0; i < listeners.length; i++) {
+      const listener = listeners[i];
+      listener();
+    }
+  }
+```
+
+
 
 ##### 如何使用Middleware
 
@@ -391,21 +414,41 @@ store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
 
 ##### Thunk简介
 
-> **编程中的Thunk**
->
-> thunk 这个词是一个编程术语，意思是 "一段做延迟工作的代码"（thunk中的“延迟”指的是将代码的执行延迟到某些条件满足后再执行，通常用于处理异步操作）.
->
-> **Redux中的Thunk**
->
-> 具体对于 Redux，“thunks”是一种编写函数的模式，其中包含可以与 Redux store dispatch和getState交互的逻辑.
->
-> Thunk 是在 Redux 应用程序中编写异步逻辑的标准方法，通常用于数据获取.但是，它们可以用于各种任务，并且可以同时包含同步和异步逻辑。
->
+**编程中的Thunk**
+
+thunk 这个词是一个编程术语，意思是 "一段做延迟工作的代码"（thunk中的“延迟”指的是将代码的执行延迟到某些条件满足后再执行，通常用于处理异步操作）.
+
+**Redux中的Thunk**
+
+具体对于 Redux，“thunks”是一种编写函数的模式，其中包含可以与 Redux store dispatch和getState交互的逻辑.
+
+Thunk 是在 Redux 应用程序中编写异步逻辑的标准方法，通常用于数据获取.但是，它们可以用于各种任务，并且可以同时包含同步和异步逻辑。
+
 > Redux Thunk 主要用于处理 Redux 应用程序中的异步操作和副作用，以及将复杂逻辑和业务逻辑从组件中分离出来。它可以让您在 Redux store 中管理应用程序的状态，并在需要时进行异步操作和副作用，以便更新应用程序的状态。
 >
 > Redux Thunk 允许您定义一个 thunk 函数，该函数可以在 Redux store 中分派多个 action，并在需要时进行异步操作和副作用，例如从服务器获取数据、向服务器发送请求、更新浏览器缓存等。通过将异步操作和副作用从组件中分离出来，您可以使组件更加专注于渲染 UI，并使代码更加可维护和可测试。
 >
 > 总之，Redux Thunk 是一个非常有用的工具，可以帮助您处理 Redux 应用程序中的异步操作和副作用，并将复杂逻辑和业务逻辑从组件中分离出来。使用 Redux Thunk 可以使您的代码更加灵活、可维护和可测试，从而提高开发效率和代码质量。
+
+
+
+```js
+// 最基础的thunk函数.
+const thunkFunction = (dispatch, getState) => {
+  // logic here that can dispatch actions or read state
+}
+
+store.dispatch(thunkFunction)
+
+// 常见用法
+const thunkFunctionCreate = () => {
+    return (dispatch, getState)=>{
+        // logic here that can dispatch actions or read state
+    }
+}
+
+store.dispatch(thunkFunctionCreate())
+```
 
 
 
@@ -458,8 +501,6 @@ export const fetchData = (url) => async (dispatch) => {
   }
 };
 ```
-
-
 
 
 
@@ -665,7 +706,9 @@ function MyComponent() {
 
 #### 异步逻辑和数据获取
 
-##### 如何进行异步数据请求  
+##### 如何进行异步数据请求
+
+通常是使用Thunk+Middleware来实现的
 
 > 就其本身而言，Redux store 对异步逻辑一无所知。它只知道如何同步 dispatch action，通过调用 root reducer 函数更新状态，并通知 UI 某些事情发生了变化。任何异步都必须发生在 store 之外。
 >
@@ -710,6 +753,9 @@ const fetchIssuesCount = (org, repo) => async dispatch => {
     dispatch(getRepoDetailsFailed(err.toString()))
   }
 }
+
+// 发送请求.
+store.dispatch(fetchIssuesCount(org, repo))
 ```
 
 ##### 流程解析
