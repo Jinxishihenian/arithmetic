@@ -665,7 +665,7 @@ function MyComponent() {
 
 #### 异步逻辑和数据获取
 
-##### 如何进行异步数据请求
+##### 如何进行异步数据请求  
 
 > 就其本身而言，Redux store 对异步逻辑一无所知。它只知道如何同步 dispatch action，通过调用 root reducer 函数更新状态，并通知 UI 某些事情发生了变化。任何异步都必须发生在 store 之外。
 >
