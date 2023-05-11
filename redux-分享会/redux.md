@@ -209,7 +209,9 @@ store.dispatch({ type: 'counter/incremented' })
 console.log(store.getState())
 ```
 
+#### 运行流程
 
+> 通过 Redux 组件的同步和纯数据流定义明确，角色简单。动作创建者创建对象 → 对象被分派到商店 → 商店调用 reducers → reducers 生成新状态 → 监听器收到状态更新通知。
 
 #### 核心概念和原则
 
