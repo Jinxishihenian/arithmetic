@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <!-- 引入字体图标库 -->
+    <!-- 引入字体图标库Font class -->
     <link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/c/font_2362211_zbodj2usng.css" />
+    <!-- 引入字体图标库Symbol -->
+    <script src="https://at.alicdn.com/t/c/font_2362211_zbodj2usng.js"></script>
     <style>
         .red {
             color: red;
@@ -49,16 +51,49 @@
         li {
             line-height: 30px;
         }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .j_1 {
+            width: 50px;
+            height: 50px;
+            fill: url(#gradient); /* 对整个图标应用一个渐变效果 */
+
+        }
+
+        .j_2 {
+        }
+
+        .j_3 {
+
+        }
     </style>
+
 </head>
 <body>
     <h1>
         我是字体图标库示例.
     </h1>
     <div>
+        <h1>
+            Font class
+        </h1>
         <ul>
             <li>
                 <i class="active blue big iconfont iconicon_wodexiangmu1">
+                </i>
+                <span>
+                    你好世界.
+                </span>
+            </li>
+            <li>
+                <i class="active red big iconfont iconicon_wodexiangmu1">
                 </i>
                 <span>
                     你好世界.
@@ -77,6 +112,27 @@
                 <span>
                     静止世界(不对齐问题)
                 </span>
+            </li>
+        </ul>
+        <h1>
+            symbol
+        </h1>
+        <ul>
+            <li>
+
+                <svg class="icon j_1" aria-hidden="true">
+                    <use xlink:href="#iconicon_shuangchuangchengguo"></use>
+                </svg>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#iconWarning1"></use>
+                </svg>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#iconicon_collection_normal"></use>
+                </svg>
             </li>
         </ul>
     </div>
