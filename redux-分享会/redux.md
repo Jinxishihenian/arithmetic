@@ -70,11 +70,12 @@ Redux 提供的模式和工具使你更容易理解应用程序中的状态何�
 function createStore (reducer, initState) {
   let state = initState;
   let listeners = [];
-
+  
+  // 订阅.
   function subscribe(listener) {
     listeners.push(listener);
   }
-
+  // 发布.
   function dispatch(action) {
     /*请按照我的计划修改 state*/
     state = reducer(state, action);
@@ -156,7 +157,7 @@ const addTodoAction = {
 
 ##### Reducers
 
-你可以将 reducer 视为一个事件监听器，它根据接收到的 action（事件）类型处理事件.
+你可以将 reducer 视为一个事件监听器(监听action)，它根据接收到的 action（事件）类型处理事件.
 
 > reducer 是一个函数，接收当前的 `state` 和一个 `action` 对象，必要时决定如何更新状态，并返回新状态。函数签名是：`(state, action) => newState`。 
 >
@@ -266,7 +267,7 @@ redux中的数据流
 
 动画的方式来表达数据流更新：
 
-![ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26](C:\Users\Administrator\Desktop\redux-分享会\ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
+![ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26](\ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
 
 #### Redux用法基础示例
 
@@ -306,7 +307,7 @@ document.getElementById('increment').addEventListener('click', function () {
 
 线上：[完整示例](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/counter-vanilla?from-embed=&file=/index.html:1713-1715)
 
-本地：base_0
+本地：base_0	
 
 #### Middleware
 
@@ -344,6 +345,13 @@ document.getElementById('increment').addEventListener('click', function () {
 1. 自定义middleware
 
 ```js
+/**
+Redux middleware 的函数签名。下面是这三个参数的解释：
+1.storeAPI：Redux store 的实例，它包含了许多 Redux 的方法，如 getState() 和 dispatch()。
+2.next：一个函数，它代表 middleware 链中的下一个 middleware（如果有的话），或者是最终的 Redux store 的 dispatch() 方法。在 middleware 中调用 next(action) 将会把 action 传递给下一个 middleware，或者是最终的 dispatch() 方法。
+3.action：正在被处理的 Redux action 对象。这个对象包含了一个 type 字段，表示这个 action 的类型，以及其他自定义的字段。
+**/
+
 const anotherExampleMiddleware = storeAPI => next => action => {
   // 当每个 action 都被 dispatch 时，在这里做一些事情
   return next(action)
@@ -764,7 +772,7 @@ store.dispatch(fetchIssuesCount(org, repo))
 
 > 当引入异步逻辑时，我们添加了一个额外的步骤，middleware 可以运行像 AJAX 请求这样的逻辑，然后 dispatch action。这使得异步数据流看起来像这样：
 
-![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](E:\project\arithmetic\redux-分享会\ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
+![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](\ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80.gif)
 
 典型的 async thunk 的代码
 
