@@ -963,4 +963,3 @@ export function Counter() {
 - Redux 还需要使用大量的辅助库和中间件，这可能会使应用程序的依赖关系变得复杂.
 - ......
 
-3.以上大部分内容来自于redux官网与ChatGPT.
