@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 通过给script标签添加type='module' 的属性,就可以以ES Module的标准执行其中的JS代码-->
+    <script type="module">
+        console.log('this is es module');
+    </script>
+    <!--    1.ESM 自动采用严格模式,忽略'use strict' -->
+    <script type="module">
+        console.log(this);
+    </script>
+    <!--    2.每个ES Module都是运行在单独的私有作用域中 -->
+    <script type="module">
+        var foo = 100;
+        console.log(foo);
+    </script>
+    <script type="module">
+        console.log(foo);
+    </script>
+    <!--    3.ESM 是通过CORS的方式请求外部JS模块的-->
+    <script type="module" src="xxx" />
+</body>
+</html>
