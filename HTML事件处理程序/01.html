@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        测试
+    </div>
+    <button id="bt">获取内容</button>
+</body>
+<script>
+    const ele = document.getElementById('bt');
+    const test = (event) => {
+        const clickEle = event.target;
+        const width = clickEle.offsetWidth;
+        const height = clickEle.offsetHeight;
+        console.log('Click element size:', width, height);
+    }
+    ele.addEventListener('click', test);
+</script>
+</html>
