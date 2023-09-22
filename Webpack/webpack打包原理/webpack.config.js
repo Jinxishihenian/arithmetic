@@ -25,7 +25,7 @@ class MyPlugin {
 
 module.exports = {
     mode: 'none',
-    entry: './src/index.js',
+    entry: './src/server.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },

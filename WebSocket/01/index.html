@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="bt">发消息</button>
+</body>
+<script>
+    const socket = new WebSocket('ws://localhost:8080');
+
+    function countWebSocket() {
+        console.log('websocket初始化.');
+        socket.onopen = function (event) {
+            console.log('WebSocket连接已打开');
+            socket.send('Hello Word 客户端信息')
+        }
+
+        socket.onmessage = function (event) {
+            console.log('收到请回复:' + event.data);
+        }
+
+        // 当连接断开时.
+        socket.onclose = function (event) {
+            // 正常关闭.
+            if (event.wasClean) {
+                console.log('WebSocket连接已正常关闭')
+            } else {
+                // 这里可以执行异常断开的操作.
+                // 重连WebSocket.
+                setTimeout(countWebSocket, 5000)
+            }
+        }
+
+        // 当连接发生错误时.
+        socket.onerror = function (event) {
+            console.error('WebSocket发生连接错误', event);
+            setTimeout(countWebSocket, 5000);
+        }
+    }
+
+    countWebSocket()
+    /*const sendHandler = function sendMsg() {
+        socket.send('Hello World');
+    }*/
+
+    // const bt = document.getElementById("bt");
+    // bt.addEventListener('click', sendHandler);
+</script>
+</html>

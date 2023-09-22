@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box {
+        background: #1E88C7;
+
+    }
+
+    .fd {
+        width: 200px;
+        height: 200px;
+
+        float: left;
+        background: red;
+    }
+
+    .fd::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+
+
+    .div {
+        background: black;
+    }
+</style>
+<body>
+    <div class="box">
+        <div class="fd"></div>
+
+        <div class="div">
+            浮动之后的元素.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 // console.log(process.argv.slice(2));
-// index.js
+// server.js
 const webpack = require('./webpack');
 const config = require('../example/webpack.config');
 // 步骤1:初始化参数 根据配置文件和shell参数合成参数.
