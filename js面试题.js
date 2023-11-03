@@ -97,7 +97,10 @@
 // }
 // console.log("你好世界!");
 
-let test = {name: '小明'};
-let demo = {key: '小红'}
-console.log(Object.assign(test, demo));
+// let test = {name: '小明'};
+// let demo = {key: '小红'}
+// console.log(Object.assign(test, demo));
 // test.a
+// js获取最大值.
+let a = [1, 2, 3, 4];
+console.log(Math.max.apply(this, a))
