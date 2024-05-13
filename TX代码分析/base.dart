@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+///
 /// 模版模式.
 /// 抽象基类. BaseWidget
 abstract class BaseWidget extends StatefulWidget {
