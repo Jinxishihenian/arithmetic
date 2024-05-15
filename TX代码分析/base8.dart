@@ -1,3 +1,19 @@
+///  请求状态.
+enum LoadingState {
+  start,
+  first,
+  loading,
+  error,
+  end,
+}
+
+/// 页面状态.
+enum LoadingWidgetState {
+  loading,
+  error,
+  content,
+}
+
 /// 请求结果.
 abstract class Result {
   set result(List list);
@@ -37,10 +53,30 @@ abstract class Search {
   void search({Map parameter});
 }
 
+/// 请求状态.
+abstract class RequestStatus {
+  LoadingState get state;
+}
+
+/// 页面状态.
+abstract class PageStates {
+  /// 页面状态.
+  LoadingWidgetState get widgetState;
+
+  /// 重新请求.
+  reLoadData();
+}
+
 /// 请求混入类.
-mixin RequestMixin implements Request, Reload, Result {
+mixin RequestMixin implements Request, Reload, Result, RequestStatus {
   /// 维护请求结果.
   List _result = [];
+  LoadingState _state = LoadingState.start; // 当前请求状态.
+
+  @override
+  LoadingState get state {
+    return _state;
+  }
 
   @override
   List get result => _result;
@@ -57,10 +93,16 @@ mixin RequestMixin implements Request, Reload, Result {
   /// 请求数据.
   @override
   void request({Map? parameter}) {
-    /// 保存result参数伪代码.
-    print('request');
-    print(parameter);
-    result = getData(parameter: parameter);
+    try {
+      /// 保存result参数伪代码.
+      _state = LoadingState.loading;
+      result = getData(parameter: parameter);
+      _state = LoadingState.end;
+    } catch (e) {
+      // 加载错误.
+      _state = LoadingState.error;
+      result = [];
+    }
   }
 
   /// 重新加载.
@@ -68,6 +110,7 @@ mixin RequestMixin implements Request, Reload, Result {
   void reload({Map? parameter}) {
     /// 重新加载时其他要做的事情.
     // request(parameter: parameter);
+    print('刷新我的组件');
   }
 
   /// 抽象方法.
@@ -109,12 +152,44 @@ mixin SearchMixin on Request implements Search {
   }
 }
 
+/// 页面状态混入类.
+mixin PageStatesMixin on Reload, RequestStatus implements PageStates {
+  get _loadingWidgetState {
+    switch (state) {
+      case LoadingState.start:
+        return LoadingWidgetState.loading;
+      case LoadingState.first:
+        return LoadingWidgetState.loading;
+      case LoadingState.error:
+        return LoadingWidgetState.error;
+      case LoadingState.loading:
+        return LoadingWidgetState.content;
+      case LoadingState.end:
+        return LoadingWidgetState.content;
+    }
+  }
+
+  @override
+  LoadingWidgetState get widgetState => _loadingWidgetState;
+
+  @override
+  reLoadData() {
+    reload();
+  }
+}
+
 class PageA with RequestMixin, ReloadMixin, SearchMixin {
   /// 页面其他逻辑.
   /// 定义位置.
   @override
   List getData({Map? parameter}) {
-    print('获取页面A的列表数据');
+    // 判断parameter是否包含page.
+    bool isPageKey = parameter?.containsKey('page') ?? false;
+    if (!isPageKey) {
+      print('走搜索逻辑吧...');
+      return ['噼里啪啦一顿搜索'];
+    }
+
     int page = parameter?['page'];
     List result = [];
     for (int i = 0; i < page * 10; i++) {
@@ -123,6 +198,8 @@ class PageA with RequestMixin, ReloadMixin, SearchMixin {
     return result;
   }
 }
+
+class PageStateA extends PageA with PageStatesMixin {}
 
 class PageB with RequestMixin, ReloadMixin, SearchMixin {
   /// 页面其他逻辑.
@@ -161,11 +238,16 @@ pageA() {
   int nextPage2 = A.pageCurrentCount ~/ 10 + 1;
   A.load(page: nextPage2);
 
+  /// 筛选.
+  A.search(parameter: {
+    'key': 'value',
+  });
+
   /// 当前页数.
   print(A.pageCurrentCount);
 
   // A.search({});
-
+  pageStateA();
 }
 
 // 页面B
@@ -182,3 +264,15 @@ pageB() {
   /// 当前页数.
   print(B.pageCurrentCount);
 }
+
+pageStateA() {
+  PageStateA StateA = PageStateA();
+  StateA.reLoadData();
+  print(StateA.widgetState);
+  print(StateA.state);
+}
+
+/// 维护一个options队列.
+/// 1.何时启用?
+/// 2.何时清空?
+/// 3.多个请求并发如何处理？
