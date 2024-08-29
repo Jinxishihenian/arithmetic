@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabric.js 示例</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/521/fabric.js"></script>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="800" height="600"></canvas>
+<button onclick="canvasC()">
+    操作画布
+</button>
+<button onclick="result()">
+    提交
+</button>
+<script>
+    // 在这里添加 Fabric.js 代码
+    // 获取 canvas 元素.
+    // canvas采用屏幕坐标系.
+    const canvas = new fabric.Canvas('myCanvas');
+
+    // 创建一个矩形
+    const rectangle = new fabric.Rect({
+        left: 0,
+        top: 0,
+        fill: 'red',
+        width: 100,
+        height: 100,
+        angle: 45,
+    });
+
+    // 将矩形添加到 canvas
+    canvas.add(rectangle);
+
+    // 定义五角星的顶点坐标
+    var starPoints = [
+        {x: 100, y: 10},  // 顶点 1
+        {x: 120, y: 80},  // 顶点 2
+        {x: 190, y: 80},  // 顶点 3
+        {x: 135, y: 120}, // 顶点 4
+        {x: 150, y: 190}, // 顶点 5
+        {x: 100, y: 150}, // 顶点 6
+        {x: 50, y: 190},  // 顶点 7
+        {x: 65, y: 120},  // 顶点 8
+        {x: 10, y: 80},   // 顶点 9
+        {x: 80, y: 80}    // 顶点 10
+    ];
+    // 使用顶点坐标创建五角星对象
+    var star = new fabric.Polygon(starPoints, {
+        left: 0,
+        top: 0,
+        fill: 'yellow',
+        stroke: 'black',
+        strokeWidth: 1,
+        selectable: true // 禁止选择和拖动
+    });
+    // 将五角星对象添加到 canvas 上
+    canvas.add(star);
+
+    // 创建圆形对象
+    var circle = new fabric.Circle({
+        radius: 50,            // 圆形的半径
+        fill: 'red',           // 填充颜色
+        left: 0,             // 圆形的左侧位置
+        top: 0,              // 圆形的顶部位置
+    });
+
+    // 将圆形添加到画布中
+    canvas.add(circle);
+    // 打印矩阵.
+    result = () => {
+        // 2D 仿射变换矩阵.
+        const transformMatrix = rectangle.calcTransformMatrix();
+
+        console.log(`2D仿射变换矩阵:${transformMatrix}`);
+        // 以矩形中心点为标准.
+        // translateX:50
+        // translateY:50
+        // 解码矩阵.
+        console.log('解码矩阵');
+        console.log(fabric.util.qrDecompose(transformMatrix));
+
+        // console.log('画布信息');
+        // console.log(canvas.toJSON());
+        // 初始坐标点.
+        // 获取对象的矩阵
+        // const center = rectangle.getCenterPoint();
+        console.log('==获取矩形坐标信息==');
+        console.log(rectangle.getCoords());
+        // 获取五角星.
+        // console.log(star.getCoords());
+        // getPolyVertices(star);
+        console.log(getPolyVertices(star));
+        console.log('圆形矩阵');
+        // 圆形矩阵.
+        console.log(circle.calcTransformMatrix());
+        console.log('原点');
+        console.log(circle.getCenterPoint());
+        console.log('圆形半径');
+        console.log(circle.radius)
+    }
+
+    // 操作画布.
+    canvasC = () => {
+        let viewportTransform = canvas.viewportTransform;
+        // 设置缩放因子
+        // let scaleFactor = 2;
+        // viewportTransform[0] = scaleFactor; // x 方向的缩放
+        // viewportTransform[3] = scaleFactor; // y 方向的缩放
+
+        // 设置平移量
+        let translateX = 100;
+        let translateY = 50;
+        viewportTransform[4] = translateX;
+        viewportTransform[5] = translateY;
+        // 应用修改并重新渲染
+        canvas.setViewportTransform(viewportTransform);
+        canvas.requestRenderAll();
+    }
+
+    getPolyVertices = (poly) => {
+        const points = poly.points,
+            vertices = [];
+        points.forEach((point) => {
+            const x = point.x - poly.pathOffset.x,
+                y = point.y - poly.pathOffset.y;
+
+            vertices.push(
+                fabric.util.transformPoint(
+                    {x: x, y: y},
+                    fabric.util.multiplyTransformMatrices(
+                        poly.canvas.viewportTransform,
+                        poly.calcTransformMatrix()
+                    )
+                )
+            );
+        });
+
+        return vertices;
+    }
+</script>
+</body>
+</html>
