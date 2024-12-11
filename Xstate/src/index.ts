@@ -1,4 +1,4 @@
-import {createMachine, assign, setup, createActor} from 'xstate';
+import {createMachine, assign, setup, createActor, SnapshotFrom} from 'xstate';
 
 // 定义上下文接口.
 // interface CountContext {
@@ -6,7 +6,16 @@ import {createMachine, assign, setup, createActor} from 'xstate';
 // }
 //
 // type CountEvent = | { type: 'INC' } | { type: 'DEC' } | { type: 'SET', value: number };
-
+// const demo = createMachine({
+//     types: {
+//         context: {} as {},
+//         events: {} as { type: 'INC' | 'DEC' | 'SET', value?: number },
+//     },
+//     context: {
+//         count: 0
+//     },
+//     on: {}
+// })
 
 const countMachine = setup({
     types: {
@@ -42,11 +51,16 @@ const countMachine = setup({
 
 const machine = setup({
     types: {
-        context: {} as {},
+        context: {} as {
+            message: string
+        },
         events: {} as { type: "play" } | { type: "pause" },
     }
 }).createMachine({
-    context: {},
+    context: {
+        message: "hello"
+    },
+    initial: "Paused",
     states: {
         Paused: {
             //  定义了特定状态下对事件的处理逻辑,只有在该状态下，状态机才会响应这些事件.
@@ -66,13 +80,17 @@ const machine = setup({
     },
 });
 
-// const countActor = createActor(countMachine).start();
-// countActor.subscribe((state) => {
-//     console.log(state.context.count);
-// });
+const machineActor = createActor(machine).start();
+// countActor.send({type: 'INC'});
+machineActor.subscribe((state) => {
+    console.log(state.context);
+});
+
+machineActor.send({type: 'play'});
+machineActor.send({type: 'pause'});
 //
 // // 添加.
-// countActor.send({type: 'INC'});
+// machineActor.send({type: 'play'});
 // // 减少.
 // countActor.send({type: 'DEC'});
 // // 设置.
