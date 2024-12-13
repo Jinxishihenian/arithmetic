@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "strart": "npx ts-node src/index.ts"
+    "strart": "npx ts-node src/waitFor.ts"
   },
   "keywords": [],
   "author": "",

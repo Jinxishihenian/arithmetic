@@ -1,5 +1,6 @@
 import {createMachine, assign, setup, createActor, SnapshotFrom} from 'xstate';
 
+// 5.0 版本.
 // 定义上下文接口.
 // interface CountContext {
 //     count: number;
@@ -16,38 +17,37 @@ import {createMachine, assign, setup, createActor, SnapshotFrom} from 'xstate';
 //     },
 //     on: {}
 // })
-
-const countMachine = setup({
-    types: {
-        context: {} as { count: number },
-        events: {} as { type: 'INC' | 'DEC' | 'SET', value?: number }
-    },
-}).createMachine({
-    context: {
-        count: 0
-    },
-    // 位于状态机的根级别,所有状态都会被监听,并执行相应的动作.
-    on: {
-        INC: {
-            actions: assign({
-                count: ({context}) => context.count + 1
-            })
-        },
-        DEC: {
-            actions: assign({
-                count: ({context}) => context.count - 1
-            })
-        },
-        SET: {
-            // actions: assign({
-            //     count: ({event}) => event.value
-            // })
-            actions: () => {
-                console.log('actions');
-            }
-        }
-    }
-});
+// const countMachine = setup({
+//     types: {
+//         context: {} as { count: number },
+//         events: {} as { type: 'INC' | 'DEC' | 'SET', value?: number }
+//     },
+// }).createMachine({
+//     context: {
+//         count: 0
+//     },
+//     // 位于状态机的根级别,所有状态都会被监听,并执行相应的动作.
+//     on: {
+//         INC: {
+//             actions: assign({
+//                 count: ({context}) => context.count + 1
+//             })
+//         },
+//         DEC: {
+//             actions: assign({
+//                 count: ({context}) => context.count - 1
+//             })
+//         },
+//         SET: {
+//             // actions: assign({
+//             //     count: ({event}) => event.value
+//             // })
+//             actions: () => {
+//                 console.log('actions');
+//             }
+//         }
+//     }
+// });
 
 const machine = setup({
     types: {
@@ -82,9 +82,22 @@ const machine = setup({
 
 const machineActor = createActor(machine).start();
 // countActor.send({type: 'INC'});
-machineActor.subscribe((state) => {
-    console.log(state.context);
+machineActor.subscribe((snapshot) => {
+    console.log(snapshot);
 });
+machineActor.subscribe({
+    next(snapshot) {
+        console.log(snapshot);
+    },
+    error(err) {
+    },
+    complete() {
+    },
+})
+// 获取xstate的快照.
+// console.log('快照');
+// console.log(machineActor.getSnapshot());
+
 
 machineActor.send({type: 'play'});
 machineActor.send({type: 'pause'});
@@ -95,3 +108,21 @@ machineActor.send({type: 'pause'});
 // countActor.send({type: 'DEC'});
 // // 设置.
 // countActor.send({type: 'SET', value: 10});
+
+// const textMachine = setup({
+//     types: {
+//         context: {} as {
+//             committedValue: string,
+//             value: '',
+//         },
+//         events: {} as { type: 'INC' | 'DEC' | 'SET', value?: number }
+//     }
+// }).createMachine({
+//     context: {committedValue: '', value: ''},
+//     initial: '',
+//     states: {
+//         reading: {},
+//         editing: {},
+//     }
+// });
+
