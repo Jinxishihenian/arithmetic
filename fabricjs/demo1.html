@@ -17,15 +17,11 @@
 </head>
 <body>
 <canvas id="myCanvas" width="800" height="600"></canvas>
-<button onclick="canvasC()">
-    操作画布
-</button>
+
 <button onclick="result()">
     提交
 </button>
 <script>
-    // 在这里添加 Fabric.js 代码
-    // 获取 canvas 元素.
     // canvas采用屏幕坐标系.
     const canvas = new fabric.Canvas('myCanvas');
 
@@ -67,66 +63,14 @@
     // 将五角星对象添加到 canvas 上
     canvas.add(star);
 
-    // 创建圆形对象
-    var circle = new fabric.Circle({
-        radius: 50,            // 圆形的半径
-        fill: 'red',           // 填充颜色
-        left: 0,             // 圆形的左侧位置
-        top: 0,              // 圆形的顶部位置
-    });
-
-    // 将圆形添加到画布中
-    canvas.add(circle);
-    // 打印矩阵.
+    // 打印坐标点.
     result = () => {
-        // 2D 仿射变换矩阵.
-        const transformMatrix = rectangle.calcTransformMatrix();
-
-        console.log(`2D仿射变换矩阵:${transformMatrix}`);
-        // 以矩形中心点为标准.
-        // translateX:50
-        // translateY:50
-        // 解码矩阵.
-        console.log('解码矩阵');
-        console.log(fabric.util.qrDecompose(transformMatrix));
-
-        // console.log('画布信息');
-        // console.log(canvas.toJSON());
-        // 初始坐标点.
-        // 获取对象的矩阵
-        // const center = rectangle.getCenterPoint();
-        console.log('==获取矩形坐标信息==');
+        // 获取矩形坐标(变形后).
         console.log(rectangle.getCoords());
-        // 获取五角星.
-        // console.log(star.getCoords());
-        // getPolyVertices(star);
+        // 获取多边形坐标(变形后).
         console.log(getPolyVertices(star));
-        console.log('圆形矩阵');
-        // 圆形矩阵.
-        console.log(circle.calcTransformMatrix());
-        console.log('原点');
-        console.log(circle.getCenterPoint());
-        console.log('圆形半径');
-        console.log(circle.radius)
     }
 
-    // 操作画布.
-    canvasC = () => {
-        let viewportTransform = canvas.viewportTransform;
-        // 设置缩放因子
-        // let scaleFactor = 2;
-        // viewportTransform[0] = scaleFactor; // x 方向的缩放
-        // viewportTransform[3] = scaleFactor; // y 方向的缩放
-
-        // 设置平移量
-        let translateX = 100;
-        let translateY = 50;
-        viewportTransform[4] = translateX;
-        viewportTransform[5] = translateY;
-        // 应用修改并重新渲染
-        canvas.setViewportTransform(viewportTransform);
-        canvas.requestRenderAll();
-    }
 
     getPolyVertices = (poly) => {
         const points = poly.points,
