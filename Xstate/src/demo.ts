@@ -105,8 +105,32 @@ const steps = {
     "3": {},
 }
 
+// 消费steps的状态,控制steps的状态树.
 // 当前状态.
 // TODO："当前步骤-当前子步骤-当前状态"，如："1-1-进行中"，"1-1-进行中-选中留置针"，"1-1-进行中-选中棉签"，"1-1-进行中-选中碘伏"。
+
+// TODO 物品(操作模型).
+const mesh = () => {
+    // 判断条件.
+    // TODO 判断 1 1-1 是否在进行中且手拿取的物品.
+    // 执行动作.
+    // 蘸取碘伏.
+    // 修改状态.
+    // TODO 修改 1 1-1 进行中-选中碘伏 的状态为完成.
+}
+
+// 步骤管理器.
+const stepManager = {
+    currentStep: null,
+    setStep: (stepId) => { /* 更新步骤逻辑 */ },
+    getNextStep: () => { /* 获取下一步骤 */ },
+};
+
+// TODO 高亮(根据steps状态映射).
+// TODO 镜头(根据steps状态映射).
+// TODO 对话(根据steps状态映射).
+// TODO 屏幕锁定(根据steps状态映射).
+// TODO 动画(根据steps状态映射).
 
 const enum BehaviorStatus {
     // 未开始.
