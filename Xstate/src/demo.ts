@@ -1,3 +1,5 @@
+// 步骤有序.
+// 动作有序|无序.
 const steps = {
     "1": {
         children: [
@@ -7,12 +9,15 @@ const steps = {
                     states: {
                         "未激活": {
                             running: false,
+                            orderly: false,
                         },
                         "待交互": {
                             running: false,
+                            orderly: false,
                         },
                         "进行中": {
                             running: true,
+                            orderly: true,
                             actions: [
                                 {describe: "选中留置针", behaviorStatus: BehaviorStatus.Running},
                                 {describe: "选中棉签", behaviorStatus: BehaviorStatus.UnStart},
@@ -21,9 +26,11 @@ const steps = {
                         },
                         "完成": {
                             running: false,
+                            orderly: false,
                         },
                         "失败": {
                             running: false,
+                            orderly: false,
                         },
                     }
                 }
@@ -122,8 +129,10 @@ const mesh = () => {
 // 步骤管理器.
 const stepManager = {
     currentStep: null,
-    setStep: (stepId) => { /* 更新步骤逻辑 */ },
-    getNextStep: () => { /* 获取下一步骤 */ },
+    setStep: (stepId) => { /* 更新步骤逻辑 */
+    },
+    getNextStep: () => { /* 获取下一步骤 */
+    },
 };
 
 // TODO 高亮(根据steps状态映射).
@@ -131,6 +140,11 @@ const stepManager = {
 // TODO 对话(根据steps状态映射).
 // TODO 屏幕锁定(根据steps状态映射).
 // TODO 动画(根据steps状态映射).
+
+// 调试部分.
+// 监听行为的变化.
+
+// 操作行为.
 
 const enum BehaviorStatus {
     // 未开始.
