@@ -1,6 +1,73 @@
+import {createMachine, setup} from "xstate";
 // 步骤有序.
 // 动作有序|无序.
-const steps = {
+// type StepsType = {
+//     // 步骤.
+//     [key: string]: {
+//         // 子步骤.
+//         children: StepsType[],
+//         // 状态.
+//         states: {
+//             [key: string]: {
+//                 // 是否运行中.
+//                 running: boolean,
+//                 // 动作.
+//                 actions?: {
+//                     // 描述.
+//                     describe: string,
+//                     // 行为状态.
+//                     behaviorStatus: BehaviorStatus,
+//                 }[],
+//             },
+//         },
+//     },
+// }
+const stepMachine = setup({}).createMachine({
+    id: 'steps',
+    initial: '1',
+    states: {
+        '1': {
+            initial: '1-1',
+            states: {
+                '1-1': {},
+                '1-2': {},
+            },
+        },
+        '2': {
+            initial: '2-1',
+            states: {
+                '2-1': {},
+                '2-2': {},
+            },
+        },
+    }
+});
+
+type StepsType = {
+    // 步骤.
+    [key: string]: {
+        // 子步骤.
+        children: StepsType[],
+        // 状态.
+        states: {
+            [key: string]: {
+                // 是否运行中.
+                running?: boolean,
+                // 动作是否有顺序.
+                actionsOrderly: boolean,
+                // 动作.
+                actions?: {
+                    // 描述.
+                    describe: string,
+                    // 行为状态.
+                    behaviorStatus?: BehaviorStatus,
+                }[],
+            },
+        },
+    },
+}
+
+const step: StepsType = {
     "1": {
         children: [
             {
@@ -9,15 +76,15 @@ const steps = {
                     states: {
                         "未激活": {
                             running: false,
-                            orderly: false,
+                            actionsOrderly: false,
                         },
                         "待交互": {
                             running: false,
-                            orderly: false,
+                            actionsOrderly: false,
                         },
                         "进行中": {
                             running: true,
-                            orderly: true,
+                            actionsOrderly: true,
                             actions: [
                                 {describe: "选中留置针", behaviorStatus: BehaviorStatus.Running},
                                 {describe: "选中棉签", behaviorStatus: BehaviorStatus.UnStart},
@@ -26,11 +93,11 @@ const steps = {
                         },
                         "完成": {
                             running: false,
-                            orderly: false,
+                            actionsOrderly: false,
                         },
                         "失败": {
                             running: false,
-                            orderly: false,
+                            actionsOrderly: false,
                         },
                     }
                 }
@@ -40,21 +107,26 @@ const steps = {
             "未激活": {
                 running: false,
                 actions: [],
+                actionsOrderly: false,
             },
             "待交互": {
                 running: false,
+                actionsOrderly: false,
             },
             "进行中": {
                 running: false,
                 actions: [],
+                actionsOrderly: false,
             },
             "完成": {
                 running: false,
                 actions: [],
+                actionsOrderly: false,
             },
             "失败": {
                 running: false,
                 actions: [],
+                actionsOrderly: false,
             },
         },
     },
@@ -66,12 +138,15 @@ const steps = {
                     states: {
                         "未激活": {
                             running: false,
+                            actionsOrderly: true,
                         },
                         "待交互": {
                             running: false,
+                            actionsOrderly: true,
                         },
                         "进行中": {
                             running: true,
+                            actionsOrderly: true,
                             actions: [
                                 {describe: "选中输液泵", behaviorStatus: BehaviorStatus.Running},
                                 {describe: "选中输液架", behaviorStatus: BehaviorStatus.UnStart},
@@ -79,9 +154,11 @@ const steps = {
                         },
                         "完成": {
                             running: false,
+                            actionsOrderly: true,
                         },
                         "失败": {
                             running: false,
+                            actionsOrderly: true,
                         },
                     }
                 }
@@ -90,26 +167,31 @@ const steps = {
         states: {
             "未激活": {
                 running: false,
+                actionsOrderly: true,
                 actions: [],
             },
             "待交互": {
                 running: false,
+                actionsOrderly: true,
             },
             "进行中": {
                 running: false,
+                actionsOrderly: true,
                 actions: [],
             },
             "完成": {
                 running: false,
+                actionsOrderly: true,
                 actions: [],
             },
             "失败": {
                 running: false,
+                actionsOrderly: true,
                 actions: [],
             },
         },
     },
-    "3": {},
+    // "3": {},
 }
 
 // 消费steps的状态,控制steps的状态树.
