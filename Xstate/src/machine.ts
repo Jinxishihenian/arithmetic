@@ -1,14 +1,16 @@
 import {createMachine, assign, setup} from "xstate";
 
-const step: StepsType = {
-    // 原始的 step 数据
-};
+// const step: StepsType = {
+//     // 原始的 step 数据
+// };
 
-const machine =setup({}).createMachine({
+const machine = setup({}).createMachine({
     context: {
         step, // 将 `step` 数据放入 context
         currentStepId: "1", // 当前激活的步骤
         currentSubTaskId: "1-1", // 当前激活的子任务
+        // 当前屏幕状态.
+
     },
     states: {
         "未激活": {
@@ -49,7 +51,7 @@ const machine =setup({}).createMachine({
 }, {
     actions: {
         activateStep: assign((context, event) => {
-            const { stepId } = event;
+            const {stepId} = event;
             return {
                 ...context,
                 currentStepId: stepId,
@@ -73,7 +75,7 @@ const machine =setup({}).createMachine({
             };
         }),
         startStep: assign((context, event) => {
-            const { stepId } = event;
+            const {stepId} = event;
             return {
                 ...context,
                 step: {
@@ -96,7 +98,7 @@ const machine =setup({}).createMachine({
             };
         }),
         completeStep: assign((context, event) => {
-            const { stepId } = event;
+            const {stepId} = event;
             return {
                 ...context,
                 step: {
@@ -119,7 +121,7 @@ const machine =setup({}).createMachine({
             };
         }),
         failStep: assign((context, event) => {
-            const { stepId } = event;
+            const {stepId} = event;
             return {
                 ...context,
                 step: {
@@ -145,3 +147,58 @@ const machine =setup({}).createMachine({
 });
 
 // 行为管理
+const at = {
+    "syb": [
+        {
+            action: "做某事",
+            // 条件.
+            group: {
+                // 当前步骤.
+                // ...
+            },
+        },
+        {
+            action: "做某事",
+            // 条件.
+            group: {
+                // 当前步骤.
+                // ...
+            },
+        },
+    ],
+}
+// 输液泵.
+const syb = async () => {
+    // 判断条件
+
+    // if(){}
+
+    // TODO 修改context:
+    // 将"棉签动作"改为进行中.
+    // TODO 我需要执行结果.
+
+    // // 异步：1.镜头.
+    // //      2.动画.
+
+    //
+    // //      3.交互.
+    // const jg = await jh();
+    // //
+    // // 开始执行.
+    // //  ...
+    // // 根据执行结果 改为完成或失败.
+    // // 修改当前node信息,跳转到下一个.
+    // // 将"选中碘伏"改为待交互.
+}
+
+const jh = () => {
+    return new Promise((resolve, reject) => {
+        resolve("成功");
+    })
+}
+// 输液架.
+const syj = () => {
+
+}
+
+
