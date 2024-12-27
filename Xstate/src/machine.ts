@@ -146,6 +146,9 @@ const machine = setup({}).createMachine({
     },
 });
 
+// 行为状态机.
+// 主要是点击事件.
+
 // 行为管理
 const at = {
     "syb": [
@@ -196,6 +199,7 @@ const jh = () => {
         resolve("成功");
     })
 }
+
 // 输液架.
 const syj = () => {
 
