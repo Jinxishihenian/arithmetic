@@ -243,3 +243,7 @@ const enum BehaviorStatus {
     // 已失败.
     Failed,
 }
+
+// 针对修改关闭,针对扩展开放.
+const test = [];
+test.push(1);
