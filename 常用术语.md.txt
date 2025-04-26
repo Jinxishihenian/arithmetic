@@ -1,0 +1,13 @@
+1.Promise
+- promise 承诺.
+- resolve 解决.
+- reject 拒绝.
+- then 然后
+- onFulfilled 已发货
+- onRejected
+- finally
+- settled 稳定的
+- race 比速度
+- withResolvers
+2.js原型链.
+- prototype 原型

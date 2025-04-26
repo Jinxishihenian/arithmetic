@@ -1,16 +1,16 @@
 /*
 demo1
-async function testAsync0() {
-    return "hello async"
+async-await function testAsync0() {
+    return "hello async-await"
 }
 
-async function testAsync1() {
+async-await function testAsync1() {
 
 }
 
 console.log(testAsync0())
 console.log(testAsync1())
-console.log(Promise.resolve("hello async"))
+console.log(Promise.resolve("hello async-await"))
 console.log(Promise.resolve())*/
 
 function testAsync() {

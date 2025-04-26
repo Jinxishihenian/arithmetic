@@ -39,8 +39,8 @@ createAudioFileAsync(audioSettings).then(successCallback, failureCallback);*/
 //     .then(() => {
 //         console.log('执行"这个",无论前面发生了什么')
 //     })
-// async 输出
-/*const test = async () => {
+// async-await 输出
+/*const test = async-await () => {
     return 'test'
 }
 const promiseTest = () => {

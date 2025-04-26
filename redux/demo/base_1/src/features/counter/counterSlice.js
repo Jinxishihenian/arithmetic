@@ -10,11 +10,11 @@ const initialState = {
     },
 };
 
-// The function below is called a thunk and allows us to perform async logic. It
+// The function below is called a thunk and allows us to perform async-await logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
+// will call the thunk with the `dispatch` function as the first argument. async-await
 // code can then be executed and other actions can be dispatched. Thunks are
-// typically used to make async requests.
+// typically used to make async-await requests.
 export const incrementAsync = createAsyncThunk(
     'counter/fetchCount',
     async (amount) => {
@@ -66,7 +66,7 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectCount = (state) => state.counter.value;
 
-// We can also write thunks by hand, which may contain both sync and async logic.
+// We can also write thunks by hand, which may contain both sync and async-await logic.
 // Here's an example of conditionally dispatching actions based on current state.
 export const incrementIfOdd = (amount) => (dispatch, getState) => {
     const currentValue = selectCount(getState());
