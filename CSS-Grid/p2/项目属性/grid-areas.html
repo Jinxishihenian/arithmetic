@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .father{
+    background:black;
+    display:grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    grid-column-gap:10px;
+    grid-row-gap:10px;
+    grid-template-areas: 'a a a' 'b b b' 'c c c';
+  }
+  .father div{
+    background:red;
+    border:1px solid green;
+  }
+
+  .child1{
+    grid-area:b;
+  }
+  .child2{}
+  .child3{}
+  .child4{}
+  .child5{}
+  .child6{}
+  .child7{}
+  .child8{}
+  .child9{}
+
+</style>
+<body>
+<h1>Grid布局</h1>
+</body>
+<div class="father">
+  <div class="child1">items1</div>
+  <div class="child2">items2</div>
+  <div class="child3">items3</div>
+  <div class="child4">items4</div>
+  <div class="child5">items5</div>
+  <div class="child6">items6</div>
+  <div class="child7">items7</div>
+  <div class="child8">items8</div>
+  <div class="child9">items9</div>
+</div>
+</html>

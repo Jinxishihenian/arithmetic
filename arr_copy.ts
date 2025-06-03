@@ -1,7 +1,7 @@
 // let arr1 = [1, 2, 3, 4];
 // let arr2: Array<any> = [];
 //
-// arr2 = arr1.slice(0, arr1.length);
+// arr2 = arr1.slice.js(0, arr1.length);
 // console.log(arr1);
 // console.log(arr2);
 // let o = {a:1};
@@ -42,7 +42,7 @@
 // console.log(book['year'])
 
 
-// // arr2=arr1.slice(0);
+// // arr2=arr1.slice.js(0);
 // arr2 = Object.assign([], arr1);
 // console.log(arr2);
 

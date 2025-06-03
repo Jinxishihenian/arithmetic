@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .container{
+        position:relative;
+        padding-left: 20px;
+    }
+    .container:after{
+       position:absolute;
+       width:12px;
+       height: 12px;
+       top:50%;
+       left:0;
+       display: block;
+       border-top: 12px solid #000;
+       border-bottom: none;
+       border-right: 12px solid transparent;
+       border-left: 12px solid transparent;
+       content: '';
+       box-sizing: border-box;
+       transform:translateY(-6px);
+    }
+</style>
+<body>
+ <div class="container">
+    你好,欢迎光临
+ </div>
+</body>
+</html>

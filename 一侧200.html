@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .wrapper {
+        /* 可选：设置整体宽度或自适应 */
+        width: 100%;
+    }
+
+    /* 清除浮动（clearfix hack） */
+    /*.clearfix::after {*/
+    /*     */
+    /*}*/
+    clearfix::after{
+       content:"";
+       display:table;
+       clear:both;
+    }
+
+    /* 左侧固定宽度侧边栏 */
+    .sidebar {
+        float: left;       /* 浮动到左侧 */
+        width: 200px;      /* 固定宽度 */
+        background: #eee;
+    }
+
+    /* 右侧流式内容区域 */
+    .content {
+        overflow: hidden;  /* 触发 BFC，使其包裹浮动元素并占据剩余空间 */
+        background: #def;
+    }
+</style>
+<body>
+<div class="wrapper clearfix">
+    <aside class="sidebar">侧边栏（200px）</aside>
+    <section class="content">主内容（填满剩余宽度）</section>
+</div>
+</body>
+</html>

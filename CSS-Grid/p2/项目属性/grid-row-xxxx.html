@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    h4{margin: 0}
+    .father{
+        background:black;
+        display:grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
+        grid-column-gap:10px;
+        grid-row-gap:10px;
+
+    }
+   .father div{
+       background:red;
+       border:1px solid green;
+
+   }
+
+   .child1{
+       grid-column-start: 2;
+       grid-column-end: 3;
+   }
+   .child2{
+       grid-column-start: 2;
+       grid-column-end: 3;
+   }
+   .child3{}
+   .child4{}
+   .child5{}
+   .child6{}
+   .child7{}
+   .child8{}
+   .child9{}
+
+</style>
+<body>
+  <h1>Grid布局</h1>
+</body>
+<div class="father">
+    <div class="child1"><h4>items1</h4></div>
+    <div class="child2"><h4>items2</h4></div>
+    <div class="child3"><h4>items3</h4></div>
+    <div class="child4"><h4>items4</h4></div>
+    <div class="child5"><h4>items5</h4></div>
+    <div class="child6"><h4>items6</h4></div>
+    <div class="child7"><h4>items7</h4></div>
+    <div class="child8"><h4>items8</h4></div>
+    <div class="child9"><h4>items9</h4></div>
+</div>
+</html>

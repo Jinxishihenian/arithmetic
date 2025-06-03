@@ -11,3 +11,104 @@
 - withResolvers
 2.js原型链.
 - prototype 原型
+- constructor 构造
+3.js数组API
+- concat 合并
+- every 任何一个
+- flat 使变平
+- every 每一个
+- reverse 颠倒
+3.基础数据类型
+- Boolean
+- Symbol
+- Undefined
+4.箭头函数.
+arguments
+5.属性类型
+- property 性质,属性
+- configurable
+- writable
+- descriptor
+- define 定义
+- enumerable 可列举的
+- proxy 代理
+6.JS模块化
+- common 普通
+- export 导出
+- require 需要
+7.Class类
+- constructor 构造函数
+- super
+8.本地存储
+- session 会议
+- cookie 饼干
+- Storage 仓库
+9.请求
+- fetch 取来
+- access 入口
+10.TS实用工具类型
+- pick 挑选
+- omit 省略
+- exclude 排除
+- record 记录
+11.css
+flex
+- vertical 垂直的
+- direction 方向
+- wrap 缠绕
+- flow 流动
+- justify 证明...有理
+- align 排列
+- content 内容
+- column 列
+- row 行
+- reverse 翻转
+- center 中心
+- space 空间
+- grow 生长
+- shrink 收缩
+- basis 基础
+- start 开始
+- self 自己
+grid
+- grid 格子
+- template 模板
+- repeat 重复
+- aspect 方面
+- ratio 比率
+- gap 缺口
+定位.
+display 展示
+position
+- absolute 绝对的
+- fixed 固定
+- static 静态的
+- relative 相对的
+- sticky 粘性
+清除浮动
+both 两者
+float:left|right
+clear:both
+sizing 胶水
+硬件加速
+- transform 改变
+- translate 转化
+- vertical 垂直
+- middle 中间
+
+HOOKS
+imperative 必要的
+handle 把柄,把手
+effect
+provider
+
+React 的生命周期:
+component 组件
+mount 挂载
+derived 派生
+snap 猛地
+shot 开枪
+should 应该
+force 强迫
+
+

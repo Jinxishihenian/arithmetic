@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+    .wrapper{
+        display: flex;
+    }
+    .sidebar {
+     flex-basis:200px;
+        background: yellow;
+    }
+
+    /* 右侧流式内容区域 */
+    .content {
+      flex-grow:1;
+        background: aqua;
+    }
+</style>
+<body>
+<div class="wrapper">
+    <aside class="sidebar">侧边栏（200px）</aside>
+    <section class="content">主内容（填满剩余宽度）</section>
+</div>
+</body>
+</html>

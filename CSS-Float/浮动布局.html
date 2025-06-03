@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .container{
+        width:960px;
+        margin:0 auto;
+        background: black;
+        padding: 10px;
+    }
+    .clearfix:after{
+        display:table;
+        clear:both;
+        content:"";
+    }
+    /* 头部与页脚 */
+    .header,
+    .footer {
+        width: 100%;
+        padding: 20px;
+        background: #333;
+        color: #fff;
+        text-align: center;
+    }
+    .sidebar{
+        float:left;
+        width:25%;
+        padding:10px;
+        background:green;
+    }
+    .main{
+        float:right;
+        width: 70%;
+        padding:10px;
+        background: yellow;
+    }
+</style>
+<body>
+ <div class="container clearfix">
+    <header class="header">头部区域</header>
+    <nav class="sidebar">侧边栏</nav>
+    <section class="main">主内容区</section>
+    <footer class="footer">页脚</footer>
+ </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// console.log(process.argv.slice(2));
+// console.log(process.argv.slice.js(2));
 // server.js
 const webpack = require('./webpack');
 const config = require('../example/webpack.config');

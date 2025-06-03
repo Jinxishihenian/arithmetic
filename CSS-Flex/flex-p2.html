@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+   .father{
+       display:flex;
+       /*行内元素使用flex*/
+       /*display:inline-flex;*/
+       /*注意设为Flex布局以后,子元素的float,clear和vertical-alig属性将失效*/
+       /*水平主轴 main axis*/
+       /*垂直交叉轴 cross axis*/
+       /*容器属性*/
+       /* 主轴居中对齐*/
+       /*justify-content:center*/
+       /*垂直交叉轴对齐*/
+       /*align-items:center*/
+       /*align-content:*/
+       /*align-content 属性定义了多根轴线的对齐方式.如果项目只有一根轴线,该属性不起作用*/
+       background:black;
+   }
+   .child1{
+       background:red;
+   }
+   .child2{
+       background:yellow;
+   }
+   .child3{
+       background:green;
+   }
+</style>
+<body>
+<h1>flex 布局</h1>
+<div class="father">
+    <div class="child1">child1</div>
+    <div class="child2">child2</div>
+    <div class="child3">child3</div>
+</div>
+</body>
+</html>
