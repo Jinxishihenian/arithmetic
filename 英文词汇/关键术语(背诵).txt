@@ -1,0 +1,299 @@
+1.Promise
+- promise 承诺.
+- resolve 解决.
+- reject 拒绝.
+- then 然后
+- onFulfilled 已发货
+- onRejected
+- finally 最后
+- settled 稳定的
+- race 比速度
+- resolver 分解者
+2.js原型链.
+- prototype 原型
+- constructor 构造
+3.js数组API
+- concat 合并
+- every 任何一个
+- flat 使变平
+- reverse 颠倒
+3.基础数据类型
+- Boolean
+- Symbol 符号
+- Undefined 未下定义的
+- instance 实例
+- object
+- includes
+4.箭头函数.
+arguments 论据
+5.属性类型
+- property 性质,属性
+- configurable 配置
+- enumerable 可列举的
+- writable 可写下的能成文的
+- descriptor 描述
+- define 定义
+- proxy 代理
+6.JS模块化
+- common 普通
+- export 导出
+- require 需要
+7.Class类
+- constructor 构造函数
+- super
+- extends
+- private 私有的
+- implements 实现
+
+8.本地存储
+- session 会议
+- cookie 饼干
+- Storage 仓库
+- Local 当地的
+- issue
+9.请求
+- fetch 取来
+- access 入口
+10.TS实用工具类型
+- pick 挑选
+- omit 省略
+- exclude 排除
+- record 记录
+- Required 必填
+11.css
+flex
+- vertical 垂直的
+- direction 方向
+- wrap 缠绕
+- flow 流动
+- justify 证明...有理
+- align 排列
+- content 内容
+- column 列
+- row 行
+- reverse 翻转
+- center 中心
+- space 空间
+- grow 生长
+- shrink 收缩
+- basis 基础
+- start 开始
+- self 自己
+- transparent 透明
+- important 重要的
+grid
+- grid 格子
+- template 模板
+- repeat 重复
+- aspect 方面
+- ratio 比率
+- gap 缺口 间隙
+- horizontal
+定位.
+display 显示,展览
+position 位置,方位
+- absolute 绝对的
+- relative 相对的
+- fixed 固定
+- static 静态的
+- sticky 粘性
+清除浮动
+both 两者
+float:left|right 浮动
+clear:both
+sizing 胶水
+content "";
+display:block;
+after 后来
+硬件加速
+- transform 改变
+- translate 转化(css的移动属性 translateX)
+- vertical 垂直
+- horizontal 水平的
+- 水平
+- middle 中间
+
+HOOKS
+
+imperative 必要的,命令
+handle 把柄,把手
+effect 作用
+provider 供应商
+implement 实现
+optimistic 乐观的
+Transition 过渡
+
+React 的生命周期:
+component 组件
+mount 挂载
+derived 派生
+snap 猛地
+shot 开枪
+should 应该
+force 强迫
+pure 纯的
+
+fiber 纤维,光纤
+scheduler 调度程序(暂时先不背)
+4. 错误处理(Error Handling):
+static getDerivedStateFromError(error):在渲染错误时调用，用于更新state以显示错误信息。
+componentDidCatch(error, info):在渲染错误时调用，用于记录错误信息，或显示错误UI。
+
+DOMAPI
+document 文档
+element 元素
+query 问题,质疑
+Selector 选择器
+inner 内部的
+Attribute 属性
+append 附加
+Child 孩子
+parent 父母
+first 第一
+last 最后
+Listen+er 听
+prevent 预防 + Default默认 (与React一致)
+stop Propagation 波及
+
+client 委托人,客户端
+scroll 卷轴
+event 事件
+target 目标
+property 财产性质
+
+toggle 切换,转换
+append 附加
+focus(暂时不背)
+get Bound(界限,范围)  Client Rect(矩形函数)
+axios 请求
+
+BOM
+location 位置
+assign
+navigator 领航员
+forward
+decode 解码
+encode 编码
+event loop 事件循环
+
+
+Redux
+thunk
+middleware
+reducer
+state
+store
+
+节流,防抖
+throttle
+
+This 指向
+Call
+Apply
+Bind
+navigator
+
+Webpack
+bundle 捆；束
+entry
+chunk  大块
+source
+development
+production
+exclude
+serve
+eval
+cheap
+module
+plugin
+polyfill
+Compiler 编译器对象
+Compilation 编辑物对象
+
+
+线程与进程 thread
+
+ES Modules
+导出 export
+导入 import
+
+HTTP头
+Access-Control-Allow-Origin
+Location
+User-Agent
+Accept
+Authorization 凭证
+Cookie
+Referer
+Location
+Cache-Control
+
+请求类型
+PUT
+PATCH
+DELETE
+HEAD
+OPTIONS
+CONNECT
+TRACE
+
+
+
+Socket
+message
+Upgrade
+close
+
+
+JSON
+stringify
+parse
+hasOwnProperty 判断是否有该属性
+
+文件上传
+createObjectURL
+ReadableStream
+ArrayBuffer
+Blob
+FormData
+
+图片懒加载
+Intersection
+Observer
+
+String API
+trim
+
+TS 实用工具类型.
+
+ajax的实现
+XMLHttpRequest
+on Ready State Change
+
+文字溢出省略
+white 白色
+space
+nowrap wrap 包,no不;不换行.
+ellipsis
+asset 资源
+
+HOOKS
+forwardRef((props, ref) =>{})
+forwardRef 包裹子组件 运送
+word 监视
+useImperativeHandle
+Provider 供应商.
+useLayoutEffect
+Optimistic 乐观的
+Transition 过渡
+Suspense 悬而不决
+
+网络
+Abort 终止
+
+设计模式
+instance 实例
+single 单一的
+Publish and subscribe 发布订阅
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .father{
+        width: 100vh;
+        height: 100vh;
+        background: red;
+        /*display: ;*/
+        position:relative;
+    }
+    .child{
+        background: green;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        width:100px;
+        height:100px;
+        transform: translate(-50%,-50%);
+    }
+</style>
+<body>
+<div class="father">
+   <div class="child">
+     测试内容
+   </div>
+</div>
+</body>
+</html>

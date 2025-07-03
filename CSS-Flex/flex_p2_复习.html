@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex布局</title>
+</head>
+<style>
+    .flexBox{
+        width:100%;
+        height:50vh;
+        background: green;
+        display:flex;
+        gap:50px;
+        /*方向*/
+        /*flex-direction:column;*/
+        /*垂直水平居中*/
+        justify-content: center;
+        align-items: center;
+     }
+    .flexChildren1{
+        background: red;
+        /*// 基数.*/
+        flex-basis: 600px;
+        height: 10vh;
+    }
+    .flexChildren2{
+        background: aqua;
+        /*flex-grow 默认是也就是不生长0*/
+        flex-grow:1;
+        height: 20vh;
+        /*默认值是1 即当长度不足默认缩小*/
+        /*flex-shrink:1;*/
+    }
+    .flexChildren3{
+        background: yellow;
+        height: 30vh;
+    }
+</style>
+<body>
+ <div class="flexBox">
+    <div class="flexChildren1">
+        flexChildren1
+    </div>
+     <div class="flexChildren2">
+         flexChildren2
+     </div>
+     <div class="flexChildren3">
+         flexChildren3
+     </div>
+ </div>
+</body>
+</html>

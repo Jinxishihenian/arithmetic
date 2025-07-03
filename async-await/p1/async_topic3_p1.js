@@ -2,7 +2,7 @@ async function testA() {
     return 1
 }
 
-/*Promise.resolve(1).then(() => {
+/*JS-Promise.resolve(1).then(() => {
     console.log(1)
 });*/
 

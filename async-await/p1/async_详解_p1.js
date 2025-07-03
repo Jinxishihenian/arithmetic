@@ -10,8 +10,8 @@ async-await function testAsync1() {
 
 console.log(testAsync0())
 console.log(testAsync1())
-console.log(Promise.resolve("hello async-await"))
-console.log(Promise.resolve())*/
+console.log(JS-Promise.resolve("hello async-await"))
+console.log(JS-Promise.resolve())*/
 
 function testAsync() {
     return new Promise(function (resolve, reject) {

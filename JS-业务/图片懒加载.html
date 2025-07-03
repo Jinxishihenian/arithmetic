@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+   .list{
+       height: 100vh;
+       display: flex;
+       /*flex-direcation:*/
+       flex-direction: column;
+       flex-wrap: wrap;
+       background-color: red;
+   }
+   .child{
+       flex-grow:1;
+       /*flex-basis:1px;*/
+       /*flex-shrink:1;*/
+   }
+</style>
+<body>
+ <div class="list">
+   虚拟列表
+ </div>
+    <img class="img" data-src="./asset/zs.png" src="./asset/xn.png" alt="">
+</body>
+<script>
+    const images = document.querySelectorAll('.img');
+    console.log('====')
+    console.log(images);
+    const imageLazy = new IntersectionObserver((entries,observer)=>{
+        // entries 就是当前所有被观察元素的状态数组.
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                console.log('IntersectionObserver');
+                const image = entry.target;
+                console.log('路径');
+                console.log(image)
+                console.log(image.dataset.src)
+                image.src = image.dataset.src;
+                observer.unobserve(image);
+            }
+        })
+    });
+    images.forEach(image=>{
+        imageLazy.observe(image);
+    })
+</script>
+</html>

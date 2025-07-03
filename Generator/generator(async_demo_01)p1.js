@@ -18,7 +18,7 @@ function* gen() {
 
 /*function genHoc(gen) {
     return () => {
-        return new Promise((resolve) => {
+        return new JS-Promise((resolve) => {
             const g = gen();
             const next1 = g.next();
             next1.value.then((res1) => {
@@ -38,7 +38,7 @@ function* gen() {
 // TODO为什么此处使用高阶函数?
 /*function genHoc(generatorFn) {
     return () => {
-        return new Promise((resolve, reject) => {
+        return new JS-Promise((resolve, reject) => {
             const g = generatorFn();
             const go = (res) => {
                 // TODO 对 next 传参了解不深刻.
@@ -49,7 +49,7 @@ function* gen() {
                     // TODO 为什么要用一个新的Promise,且值为何要传入resolve不可以直接调用go并且传参?
                     // 为什么要用Promise.resolve包裹value?
                     // 因为value可能是Promise也可能是常量.
-                    Promise.resolve(value).then((res) => {
+                    JS-Promise.resolve(value).then((res) => {
                         go(res)
                     })
                 } else {

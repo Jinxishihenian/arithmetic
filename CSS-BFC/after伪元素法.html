@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .clearFloat{}
+    .clearFloat:after{
+       content: "";
+       clear: both;
+       display: block;
+       /*overflow: hidden;*/
+    }
+</style>
+<body>
+ <div class="container">
+    <div class="float">浮动元素</div>
+    <div>你好</div>
+ </div>
+</body>
+</html>

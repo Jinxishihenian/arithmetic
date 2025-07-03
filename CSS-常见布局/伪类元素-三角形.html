@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .tag{
+        /*默认静态定位*/
+        /*position: static;*/
+        /*相对布局*/
+        position:relative;
+        margin-left: 10px;
+    }
+    .tag:after{
+       content: "";
+       display: block;
+       border-top: 10px solid red;
+       border-bottom: 10px solid transparent;
+       border-left: 10px solid transparent;
+       border-right: 10px solid transparent;
+       position:absolute;
+       top:50%;
+       left:0;
+       transform: translate(-100%,-20%);
+    }
+</style>
+<body>
+  <div class="tag">标识</div>
+</body>
+</html>

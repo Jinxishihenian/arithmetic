@@ -1,0 +1,4 @@
+@decorator
+class Myclass{
+
+}

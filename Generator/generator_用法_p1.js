@@ -49,7 +49,7 @@ console.log(g.next())
 
 /*
 function fn(num) {
-    return new Promise((resolve) => {
+    return new JS-Promise((resolve) => {
         setTimeout(() => {
             resolve(num);
         }, 1000)
@@ -91,7 +91,7 @@ console.log(g.next(2222))
 
 /*
 function fn(nums) {
-    return new Promise((resolve) => {
+    return new JS-Promise((resolve) => {
         setTimeout(() => {
             resolve(nums * 2);
         }, 100)
@@ -135,7 +135,7 @@ console.log(g.next('22'))*/
 
 /*
 function fn(nums) {
-    return new Promise(resolve => {
+    return new JS-Promise(resolve => {
         setTimeout(() => {
             resolve(nums * 2)
         }, 1000);
@@ -151,7 +151,7 @@ function* gen() {
 
 function generatorHOC(generator) {
     return function () {
-        return new Promise((resolve, reject) => {
+        return new JS-Promise((resolve, reject) => {
             const g = generator();
             const next1 = g.next();
             // resolve();

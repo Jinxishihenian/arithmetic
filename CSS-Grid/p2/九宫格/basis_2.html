@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九宫格</title>
+</head>
+<style>
+    /* 重要的属性都在父级 */
+    .gridBox{
+        display:grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3,1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        background: red;
+    }
+    .gridChildren{
+        background: green;
+    }
+</style>
+<body>
+ <div class="gridBox">
+     <div class="gridChildren">1</div>
+     <div class="gridChildren">2</div>
+     <div class="gridChildren">3</div>
+     <div class="gridChildren">4</div>
+     <div class="gridChildren">5</div>
+     <div class="gridChildren">6</div>
+     <div class="gridChildren">7</div>
+     <div class="gridChildren">8</div>
+     <div class="gridChildren">9</div>
+ </div>
+</body>
+</html>
