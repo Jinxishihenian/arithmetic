@@ -81,6 +81,7 @@ flex
 - self 自己
 - transparent 透明
 - important 重要的
+- normal 正常
 grid
 - grid 格子
 - template 模板
@@ -136,7 +137,7 @@ pure 纯的
 fiber 纤维,光纤
 scheduler 调度程序(暂时先不背)
 4. 错误处理(Error Handling):
-static getDerivedStateFromError(error):在渲染错误时调用，用于更新state以显示错误信息。
+static get Derived StateFromError(error):在渲染错误时调用，用于更新state以显示错误信息。
 componentDidCatch(error, info):在渲染错误时调用，用于记录错误信息，或显示错误UI。
 
 DOMAPI
@@ -169,9 +170,9 @@ axios 请求
 
 BOM
 location 位置
-assign
+assign 分配;指派
 navigator 领航员
-forward
+forward 早的/运送
 decode 解码
 encode 编码
 event loop 事件循环
@@ -179,25 +180,30 @@ event loop 事件循环
 
 Redux
 thunk
-middleware
-reducer
-state
-store
+middle 中部的
+ware ...用具
+
+reducer 还原剂
+state 州,状态
+store 商店
 
 节流,防抖
-throttle
+throttle 节流
+debounce 防抖
 
 This 指向
-Call
+Call 呼叫
 Apply
 Bind
-navigator
+
+navigator 领航员
+cursor 光标
 
 Webpack
 bundle 捆；束
-entry
+entry  入口
 chunk  大块
-source
+source 来源
 development
 production
 exclude
@@ -219,8 +225,10 @@ ES Modules
 
 HTTP头
 Access-Control-Allow-Origin
+入口-控制-运行-来源
 Location
-User-Agent
+User-
+Agent
 Accept
 Authorization 凭证
 Cookie
@@ -243,6 +251,12 @@ Socket
 message
 Upgrade
 close
+
+代理人:agent
+提升:upgrade
+补丁:patch
+权限:authorization
+接收:accept
 
 
 JSON
@@ -295,5 +309,11 @@ Abort 终止
 instance 实例
 single 单一的
 Publish and subscribe 发布订阅
+
+JSON schema JSON模式
+
+编辑器
+cursor 光标
+
 
 

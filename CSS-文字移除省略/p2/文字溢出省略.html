@@ -5,19 +5,35 @@
     <title>Title</title>
 </head>
 <style>
-    .father{
-       width: 200px;
-       background: red;
+    .father {
+        width: 300px;
+        background: red;
     }
-    .child{
 
+    .child {
+        background: yellow;
+        overflow: hidden;
+        /*生效条件
+        1. 必须作用在块级或内联块级.
+        2. 文字行内元素必须在自己的子级.
+        3. 必须设置 white-space:nowrap,不换行.
+         */
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 </style>
 <body>
- <div class="father">
+<div class="father">
     <div class="child">
-       你好,未来 你好,未来 你好,未来 你好,未来 你好,未来 你好,未来
+        现在你好,你好,你好,你好现在你好,你好,你好,你好现在你好,你好,你好,你好现在你好,你好,你好,你好
+        <span>
+          你好,未来 你好,未来 你好,未来 你好,未来 你好,未来 你好,未来
+        </span>
+        <!--不会生效-->
+        <div>
+            过去再见,过去再见,过去再见,过去再见,过去再见,过去再见,过去再见,过去再见,过去再见,过去再见
+        </div>
     </div>
- </div>
+</div>
 </body>
 </html>
