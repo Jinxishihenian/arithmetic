@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box {
+    }
+
+    .item1 {
+        /*display:*/
+        background: saddlebrown;
+    }
+
+    .item2 {
+        /*display: flex;*/
+        background: red;
+        height: 60px;
+    }
+
+    /*高度被塌陷
+      宽度保持了默认
+    */
+    .item2_box {
+        background: black;
+        min-height: 10px;
+    }
+
+    .item2-1 {
+        /*display: fl;*/
+        float: left;
+        background: lawngreen;
+        border: 1px solid red;
+    }
+
+    .item2_box:after {
+        display: block;
+        content: " ";
+        clear: both;
+    }
+
+    .item3 {
+        background: aqua;
+        float: right;
+    }
+
+    span {
+        border: 1px solid red;
+    }
+
+</style>
+<body>
+<div class="box">
+    <div class="item1">1</div>
+    <div class="item2">
+        <div class="item2_box">
+            <div class="item2-1">
+                item2-1
+            </div>
+            <div class="item2-1">
+                item2-1
+            </div>
+        </div>
+
+    </div>
+    <div class="item3">3</div>
+</div>
+</body>
+</html>

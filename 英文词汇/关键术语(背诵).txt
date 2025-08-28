@@ -13,16 +13,18 @@
 - prototype 原型
 - constructor 构造
 3.js数组API
-- concat 合并
-- every 任何一个
+- concat 合并 需要一个数组接收改变后的数组
+- every 任何一个(该API需要任何一个item都满足 才返回true)
 - flat 使变平
 - reverse 颠倒
 3.基础数据类型
-- Boolean
+- Boolean 布尔类型.
 - Symbol 符号
 - Undefined 未下定义的
 - instance 实例
 - object
+
+
 - includes
 4.箭头函数.
 arguments 论据
@@ -50,7 +52,8 @@ arguments 论据
 - cookie 饼干
 - Storage 仓库
 - Local 当地的
-- issue
+- issue 问题
+- succeed 成功
 9.请求
 - fetch 取来
 - access 入口
@@ -136,6 +139,13 @@ pure 纯的
 
 fiber 纤维,光纤
 scheduler 调度程序(暂时先不背)
+Derived 衍生的
+transform 改变
+component 成分/组件
+
+
+imperative 必要的,命令
+
 4. 错误处理(Error Handling):
 static get Derived StateFromError(error):在渲染错误时调用，用于更新state以显示错误信息。
 componentDidCatch(error, info):在渲染错误时调用，用于记录错误信息，或显示错误UI。
@@ -271,6 +281,13 @@ ArrayBuffer
 Blob
 FormData
 
+
+buffer 缓冲
+observer 观察者
+custom 自定义
+upgrade 提升
+thread 进程
+
 图片懒加载
 Intersection
 Observer
@@ -308,12 +325,62 @@ Abort 终止
 设计模式
 instance 实例
 single 单一的
-Publish and subscribe 发布订阅
+Publish 发布
+subscribe 订阅
+schema 模式
 
 JSON schema JSON模式
 
 编辑器
 cursor 光标
+
+P3
+allSettled 固定的；稳定的
+resolve 决心；解决；分解
+Boolean 布尔
+includes 包含
+entries (entry 入口 的复数)
+
+Document Fragment(碎片,片段)
+direction 方向
+request 请求
+Animation 动画
+Frame 框架,结构
+
+
+align 使一行
+basis 底部;基础
+shrink 收缩
+media 媒体
+template 模板
+
+flow 流动
+repeat 重复
+
+react hooks
+transition 过渡.
+imperative 必要的
+derived 衍生
+
+optimistic 乐观的
+
+document 文档
+element 元素
+event 事件
+listener 监听
+prevent 预防 Default
+
+stop Propagation 波及
+
+query 问题
+selector 选择器
+attribute 属性
+toggle 切换
+append 附加
+fiber 纤维;
+
+
+
 
 
 

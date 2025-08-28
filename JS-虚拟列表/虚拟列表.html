@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .container {
+        width: 500px;
+        height: 500px;
+        border: 1px solid #f80c0c;
+        margin: auto;
+        background: azure;
+    }
+
+    .list_scroll {
+        width: 100%;
+        height: 100%;
+        /*超出滚动距离*/
+        overflow-y: auto;
+        background-color: pink;
+    }
+
+    .list {
+        width: 100%;
+        margin: auto;
+        background-color: #4CAF50;
+    }
+
+    .item {
+        /*box-sizing: border-box;*/
+        border: 1px solid yellow;
+        height: 120px;
+    }
+</style>
+<body>
+<!--视口容器(可视区域)-->
+<div class="container">
+    <!--可滚动区域-->
+    <div class="list_scroll">
+        <div class="list">
+            <!--内容区域 -->
+            <!--            <div class="item">1</div>-->
+            <!--            <div class="item">2</div>-->
+            <!--            <div class="item">3</div>-->
+            <!--            <div class="item">4</div>-->
+            <!--            <div class="item">5</div>-->
+            <!--            <div class="item">6</div>-->
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // 获取容器和列表元素.
+    const listScroll = document.querySelector('.list_scroll');
+    const list = document.querySelector('.list');
+    // 数据源.
+    const dataSource = [];
+    let renderData = [];
+    // 渲染数据=>通过定义首位index截取数据源.
+    const itemHeight = 120;
+    // listScroll容器可以显示的最大数量.
+    // 向下取整且 + 2
+    const maxCount = Math.floor(listScroll.clientHeight / itemHeight) + 2;
+    // 开始位置索引.
+    let startIndex = 0;
+    // 结束位置索引.
+    let endIndex = 0;
+
+    // 源数据
+    function GetData() {
+        for (let i = 0; i < 200; i++) {
+            dataSource.push(i)
+        }
+    }
+
+    // 计算开始位置和结束位置.
+    function ComputePointerPosition() {
+        const end = startIndex + maxCount;
+        endIndex = dataSource[end] ? end : dataSource.length;
+    }
+
+    // 截取渲染数据.
+    function GetRenderData() {
+        renderData = dataSource.slice(startIndex, endIndex);
+    }
+
+    // 渲染.
+    function Render() {
+        // 计算结束位置.
+        ComputePointerPosition();
+        // 获取渲染数据.
+        GetRenderData();
+        // 将截取的渲染数据生成动态的item元素，填充到list内容元素
+        list.innerHTML = renderData.map(item => `<div class="item" style="height: ${itemHeight}px">${item}</div>`).join('')
+    }
+
+    // 记录到的位置索引
+    let pointerIndex = 0
+
+    // 监听listOut滚动事件.
+    function ScrollHandler() {
+        // 开始更新位置索引:滚动的距离/每个元素的高度.
+        startIndex = Math.floor(listScroll.scrollTop / itemHeight);
+        if (pointerIndex === startIndex) return;
+        pointerIndex = startIndex;
+        // 更新位置,重新渲染.
+        Render();
+        if (dataSource.length - startIndex >= maxCount) {
+            console.log('持续未触发..');
+            list.style.transform = `translateY(${startIndex * itemHeight}px)`;
+            // list.style.color = 'red';
+        } else {
+            // 划到底部加载更多数据.
+            GetData();
+        }
+    }
+
+    function init() {
+        GetData();
+        Render();
+        // 监听滚动事件.
+        listScroll.addEventListener('scroll', ScrollHandler);
+    }
+
+    init();
+</script>
+</html>
